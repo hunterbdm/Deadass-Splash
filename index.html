@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Deadass Splash</title>
+        <meta name="description" content="Description Here"/>
+        <meta name="keywords" content="adidas,splash,bot,fuck,why,cant,I,cop,dude"/>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link href="style.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="section left">
+            <h3>Add Tasks
+                <h5>Proxies</h5>
+                <textarea id="proxies" class="form-control input input-proxies"></textarea>
+                <h5>Splash Url</h5>
+                <input type="text" id="splashUrl" class="form-control input input-splash-url">
+                <h5>SKU</h5>
+                <input type="text" id="sku" class="form-control input input-sku">
+
+                <h5>Tasks/Proxy</h5>
+                <input type="number" id="tpp" class="form-control input input-tpp" min="1" value="1">
+                <button type="button" id="addTasks" class="btn btn-default tasks-action">Add</button>
+                <button type="button" id="removeAllTasks" class="btn btn-default tasks-action">Remove All</button>
+                
+            </h3>
+            <h3>ATC Settings
+                <h5>Form JSON</h5>
+                <input type="text" id="formJson" class="form-control input input-form-json">
+                <h5>Sitekey</h5>
+                <input type="text" id="sitekey" class="form-control input input-sitekey">
+                <h5>Anti-Captcha Apikey</h5>
+                <input type="text" id="apikey" class="form-control input input-apikey">
+                <span id="readySpan"> <input type="checkbox" id="ready" class="input input-ready">Ready</span>
+                <button type="button" id="saveSettings" class="btn btn-default tasks-action tasks-action-save">Save Settings</button>
+            </h3>
+        </div>
+        <div class="section right">
+            <h3>Tasks</h3>
+                <h5>Queue Tasks</h5>
+                <div class="scroll-table top">
+                    <table>
+                        <thead> 
+                            <tr>
+                                <th><a href="#">ID</a></th>
+                                <th><a href="#">Status</a></th>
+                                <th><a href="#">Proxy</a></th>
+                                <th><a href="#">Action</a></th>
+                            </tr>
+                        </thead>
+                      <tbody id="queueTasks">
+                          
+                      </tbody>
+                    </table>
+                </div>
+            <h5>ATC Tasks</h5>
+                <div class="scroll-table">
+                    <table>
+                        <thead> 
+                            <tr>
+                                <th><a href="#">ID</a></th>
+                                <th><a href="#">Status</a></th>
+                                <th><a href="#">Proxy</a></th>
+                                <th><a href="#">Action</a></th>
+                            </tr>
+                        </thead>
+                      <tbody id="atcTasks">
+
+                      </tbody>
+                    </table>
+                </div>
+        </div>
+        <script>
+            window.$ = window.jQuery = require('jquery');
+        </script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="index.js"></script>
+    </body>
+</html>
