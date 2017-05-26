@@ -98,7 +98,7 @@ function init() {
     });
 }
 
-function getCaptcha2(apikey, sitekey, url, callback=undefined) {
+function getCaptcha(apikey, sitekey, url, callback=undefined) {
     request({
         url: 'http://2captcha.com/in.php',
         followAllRedirects: true,
@@ -142,7 +142,7 @@ function getCaptcha2(apikey, sitekey, url, callback=undefined) {
             });
 }
 
-function getCaptcha(apikey, sitekey, url, callback=undefined) {
+function getCaptcha2(apikey, sitekey, url, callback=undefined) {
     request({
         url: 'https://api.anti-captcha.com/createTask',
         method: 'POST',
