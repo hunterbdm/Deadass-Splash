@@ -1,80 +1,300 @@
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
-        <meta charset="UTF-8"/>
-        <title>Deadass Splash</title>
-        <meta name="description" content="Description Here"/>
-        <meta name="keywords" content="adidas,splash,bot,fuck,why,cant,I,cop,dude"/>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link href="style.css" rel="stylesheet">
+      <meta charset="UTF-8"/>
+      <title>Deadass Splash</title>
+      <meta name="description" content="Description Here"/>
+      <meta name="keywords" content="adidas,splash,bot,fuck,why,cant,I,cop,dude"/>
+      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+      <link href="style.css" rel="stylesheet">
     </head>
     <body>
-        <div class="section left">
-            <h3>Add Tasks
-                <h5>Proxies</h5>
-                <textarea id="proxies" class="form-control input input-proxies"></textarea>
-                <h5>Splash Url</h5>
-                <input type="text" id="splashUrl" class="form-control input input-splash-url">
-                <h5>SKU</h5>
-                <input type="text" id="sku" class="form-control input input-sku">
-
-                <h5>Tasks/Proxy</h5>
-                <input type="number" id="tpp" class="form-control input input-tpp" min="1" value="1">
-                <button type="button" id="addTasks" class="btn btn-default tasks-action">Add</button>
-                <button type="button" id="removeAllTasks" class="btn btn-default tasks-action">Remove All</button>
-                
-            </h3>
-            <h3>ATC Settings
-                <h5>Form JSON</h5>
-                <input type="text" id="formJson" class="form-control input input-form-json">
-                <h5>Sitekey</h5>
-                <input type="text" id="sitekey" class="form-control input input-sitekey">
-                <h5>2Captcha Apikey</h5>
-                <input type="text" id="apikey" class="form-control input input-apikey">
-                <span id="readySpan"> <input type="checkbox" id="ready" class="input input-ready">Ready</span>
-                <button type="button" id="saveSettings" class="btn btn-default tasks-action tasks-action-save">Save Settings</button>
-            </h3>
+      <div class="div-top">
+        <div class="div-tabSelect div-tabSelect-current" id="tabSelectAddTasks">
+          <img class="tab-img" src="img\add.png"></img>
+          <span>New Tasks</span>
         </div>
-        <div class="section right">
-            <h3>Tasks</h3>
-                <h5>Queue Tasks</h5>
-                <div class="scroll-table top">
-                    <table>
-                        <thead> 
-                            <tr>
-                                <th><a href="#">ID</a></th>
-                                <th><a href="#">Status</a></th>
-                                <th><a href="#">Proxy</a></th>
-                                <th><a href="#">Action</a></th>
-                            </tr>
-                        </thead>
-                      <tbody id="queueTasks">
-                          
-                      </tbody>
-                    </table>
-                </div>
-            <h5>ATC Tasks</h5>
-                <div class="scroll-table">
-                    <table>
-                        <thead> 
-                            <tr>
-                                <th><a href="#">ID</a></th>
-                                <th><a href="#">Status</a></th>
-                                <th><a href="#">Proxy</a></th>
-                                <th><a href="#">Action</a></th>
-                            </tr>
-                        </thead>
-                      <tbody id="atcTasks">
-
-                      </tbody>
-                    </table>
-                </div>
+        <div class="div-tabSelect" id="tabSelectBruteforce">
+          <img class="tab-img" src="img\target.png"></img>
+          <span>Bruteforce Tasks</span>
         </div>
-        <script>
-            window.$ = window.jQuery = require('jquery');
-        </script>
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <script src="index.js"></script>
+        <div class="div-tabSelect" id="tabSelectCart">
+          <img class="tab-img" src="img\cart.png"></img>
+          <span>Cart Tasks</span>
+        </div>
+        <div class="div-tabSelect" id="tabSelectSettings">
+          <img class="tab-img" src="img\settings.png"></img>
+          <span>Settings</span>
+        </div>
+        <div class="div-tabSelect" id="tabSelectPayment">
+          <img class="tab-img" src="img\wallet.png"></img>
+          <span>Billing</span>
+        </div>
+      </div>
+      <div class="div-tab" id="tabAddTasks">
+        <div class="half-width full-height left">
+          <h4>New BruteForce Tasks</h4>
+          <label>Proxies</label>
+          <textarea id="proxies" class="input input-proxies"></textarea>
+          <label class="input half-width left">Splash Url</label>
+          <label class="input half-width right">SKU</label>
+          <input type="text" id="splashUrlBruteforce" class="input half-width left">
+          <input type="text" id="skuBruteforce" class="input half-width right">
+          <label class="input full-width">Tasks / Proxy</label>
+          <input class="left" type="number" value="1" min="1" id="tpp">
+          <button class="right" type="button" id="addBruteforce">Add</button>
+        </div>
+        <div class="half-width full-height right">
+          <h4>New Cart Tasks</h4>
+          <label class="full-width">PROXY</label>
+          <input type="text" class="full-width" id="proxyCart">
+          <label class="input half-width left">Splash Url</label>
+          <label class="input half-width right">SKU</label>
+          <input type="text" id="splashUrlCart" class="input half-width left">
+          <input type="text" id="skuCart" class="input half-width right">
+          <label>Cookies</label>
+          <textarea id="cookies" class="input input-cookies left"></textarea>
+          <select multiple class="input input-sizes right" id="sizes">
+            <option>5</option>
+            <option>5.5</option>
+            <option>6</option>
+            <option>6.5</option>
+            <option>7</option>
+            <option>7.5</option>
+            <option selected="selected">8</option>
+            <option selected="selected">8.5</option>
+            <option selected="selected">9</option>
+            <option selected="selected">9.5</option>
+            <option selected="selected">10</option>
+            <option selected="selected">10.5</option>
+            <option selected="selected">11</option>
+            <option selected="selected">11.5</option>
+            <option selected="selected">12</option>
+            <option>12.5</option>
+            <option>13</option>
+            <option>14</option>
+            <option>15</option>
+          </select>
+          <label class="input full-width">Tasks</label>
+          <input class="left" type="number" value="1" min="1" id="tasks">
+          <select id="regionCart" class="mid">
+            <option value="US">US </option>
+            <option value="UK">UK </option>
+          </select>
+          <button class="right" type="button" id="addCart">Add</button>
+        </div>
+      </div>
+      <div class="div-tab" id="tabBruteforce" hidden>
+        <h4>Bruteforce Tasks</h4>
+        <div class="scroll-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th><a href="#">ID</a></th>
+                        <th><a href="#">Status</a></th>
+                        <th><a href="#">Proxy</a></th>
+                        <th><a href="#">Action</a></th>
+                    </tr>
+                </thead>
+              <tbody id="bruteforceTasks">
+
+              </tbody>
+            </table>
+        </div>
+        <button type="button" id="removeAllBruteTasks">Remove All</button>
+      </div>
+      <div class="div-tab" id="tabCart" hidden>
+        <h4>Cart Tasks</h4>
+        <div class="scroll-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th><a href="#">ID</a></th>
+                        <th><a href="#">Region</a></th>
+                        <th><a href="#">Size</a></th>
+                        <th><a href="#">Status</a></th>
+                        <th><a href="#">Proxy</a></th>
+                        <th><a href="#">Action</a></th>
+                    </tr>
+                </thead>
+              <tbody id="cartTasks">
+
+              </tbody>
+            </table>
+        </div>
+        <button class="left" type="button" id="removeAllCartTasks">Remove All</button>
+        <select class="mid" id="regionHarvester">
+          <option>US </option>
+          <option>UK </option>
+        </select>
+        <input type="number" id="threads" class="mid" value="3" min="1">
+        <button type="button" id="startHarvester" class="mid">Start</button>
+        <button type="button" id="stopHarvester" class="right" disabled>Stop</button>
+      </div>
+      <div class="div-tab" id="tabSettings" hidden>
+        <div class="half-width full-height left">
+          <h4>Global Settings</h4>
+          <label>2Captcha API Keys</label>
+          <textarea id="apiKeys" class="input input-apikeys"></textarea>
+          <button type="button" name="button" id="saveSettings">Save</button>
+        </div>
+        <div class="half-width full-height right">
+          <h4>Region Settings</h4>
+          <select id="dropdownRegion">
+            <option value="US">US </option>
+            <option value="UK">UK </option>
+          </select>
+          <div class="div-region" id="divUS">
+            <label>Sitekey</label>
+            <input type="text" id="sitekeyUS" class="input input-sitekey full-width">
+            <label>Form JSON</label>
+            <textarea id="formJsonUS" class="input input-formJson"></textarea>
+          </div>
+          <div class="div-region" id="divUK" hidden>
+            <label>Sitekey</label>
+            <input type="text" id="sitekeyUK" class="input input-sitekey full-width">
+            <label>Form JSON</label>
+            <textarea id="formJsonUK" class="input input-formJson"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="div-tab" id="tabPayment" hidden>
+        <div class="half-width left">
+          <label class="half-width left">* NAME</label>
+          <label class="half-width right">* LAST NAME</label>
+          <input class="half-width left" type="text" id="firstName"></input>
+          <input class="half-width right" type="text" id="lastName"></input>
+          <label class="full-width">* STREET ADDRESS, PO BOX</label>
+          <input class="full-width" type="text" id="address1"></input>
+          <label class="full-width">APARTMENT, SUITE, UNIT, BUILDING, FLOOR (OPTIONAL)</label>
+          <input class="full-width" type="text" id="address2"></input>
+          <label class="input input-city">* CITY/TOWN</label>
+          <label class="input input-zip">* ZIP</label>
+          <label class="input input-state">* COUNTRY</label>
+          <label class="input input-state">* STATE</label>
+          <input class="input input-city" type="text" id="city"></input>
+          <input class="input input-zip" type="text" id="zip"></input>
+          <select class="input input-country" id="country">
+            <option value="US">United States</option>
+            <option value="UK">United Kingdom</option>
+          </select>
+          <select class="input input-state" id="state">
+    				<option class="selectoption" label="State" value="">State</option>
+    				<option class="selectoption" label="AA Military" value="AA">AA Military</option>
+    				<option class="selectoption" label="AE Military" value="AE">AE Military</option>
+    				<option class="selectoption" label="AP Military" value="AP">AP Military</option>
+    				<option class="selectoption" label="Alabama" value="AL">Alabama</option>
+    				<option class="selectoption" label="Alaska" value="AK">Alaska</option>
+    				<option class="selectoption" label="Arizona" value="AZ">Arizona</option>
+    				<option class="selectoption" label="Arkansas" value="AR">Arkansas</option>
+    				<option class="selectoption" label="California" value="CA">California</option>
+    				<option class="selectoption" label="Colorado" value="CO">Colorado</option>
+    				<option class="selectoption" label="Connecticut" value="CT">Connecticut</option>
+    				<option class="selectoption" label="Delaware" value="DE">Delaware</option>
+    				<option class="selectoption" label="District of Columbia" value="DC">District of Columbia</option>
+    				<option class="selectoption" label="Florida" value="FL">Florida</option>
+    				<option class="selectoption" label="Georgia" value="GA">Georgia</option>
+    				<option class="selectoption" label="Hawaii" value="HI">Hawaii</option>
+    				<option class="selectoption" label="Idaho" value="ID">Idaho</option>
+    				<option class="selectoption" label="Illinois" value="IL">Illinois</option>
+    				<option class="selectoption" label="Indiana" value="IN">Indiana</option>
+    				<option class="selectoption" label="Iowa" value="IA">Iowa</option>
+    				<option class="selectoption" label="Kansas" value="KS">Kansas</option>
+    				<option class="selectoption" label="Kentucky" value="KY">Kentucky</option>
+    				<option class="selectoption" label="Louisiana" value="LA">Louisiana</option>
+    				<option class="selectoption" label="Maine" value="ME">Maine</option>
+    				<option class="selectoption" label="Maryland" value="MD">Maryland</option>
+    				<option class="selectoption" label="Massachusetts" value="MA">Massachusetts</option>
+    				<option class="selectoption" label="Michigan" value="MI">Michigan</option>
+    				<option class="selectoption" label="Minnesota" value="MN">Minnesota</option>
+    				<option class="selectoption" label="Mississippi" value="MS">Mississippi</option>
+    				<option class="selectoption" label="Missouri" value="MO">Missouri</option>
+    				<option class="selectoption" label="Montana" value="MT">Montana</option>
+    				<option class="selectoption" label="Nebraska" value="NE">Nebraska</option>
+    				<option class="selectoption" label="Nevada" value="NV">Nevada</option>
+    				<option class="selectoption" label="New Hampshire" value="NH">New Hampshire</option>
+    				<option class="selectoption" label="New Jersey" value="NJ">New Jersey</option>
+    				<option class="selectoption" label="New Mexico" value="NM">New Mexico</option>
+    				<option class="selectoption" label="New York" value="NY">New York</option>
+    				<option class="selectoption" label="North Carolina" value="NC">North Carolina</option>
+    				<option class="selectoption" label="North Dakota" value="ND">North Dakota</option>
+    				<option class="selectoption" label="Ohio" value="OH">Ohio</option>
+    				<option class="selectoption" label="Oklahoma" value="OK">Oklahoma</option>
+    				<option class="selectoption" label="Oregon" value="OR">Oregon</option>
+    				<option class="selectoption" label="Pennsylvania" value="PA">Pennsylvania</option>
+    				<option class="selectoption" label="Rhode Island" value="RI">Rhode Island</option>
+    				<option class="selectoption" label="South Carolina" value="SC">South Carolina</option>
+    				<option class="selectoption" label="South Dakota" value="SD">South Dakota</option>
+    				<option class="selectoption" label="Tennessee" value="TN">Tennessee</option>
+    				<option class="selectoption" label="Texas" value="TX">Texas</option>
+    				<option class="selectoption" label="Utah" value="UT">Utah</option>
+    				<option class="selectoption" label="Vermont" value="VT">Vermont</option>
+    				<option class="selectoption" label="Virginia" value="VA">Virginia</option>
+    				<option class="selectoption" label="Washington" value="WA">Washington</option>
+    				<option class="selectoption" label="West Virginia" value="WV">West Virginia</option>
+    				<option class="selectoption" label="Wisconsin" value="WI">Wisconsin</option>
+    				<option class="selectoption" label="Wyoming" value="WY">Wyoming</option>
+          </select>
+          <label class="full-width">* PHONE NUMBER</label>
+          <input class="full-width" type="text" id="phone"></input>
+          <label class="full-width">* EMAIL ADDRESS</label>
+          <input class="full-width" type="text" id="email"></input>
+        </div>
+        <div class="half-width right">
+          <label class="full-width">* NAME ON CARD</label>
+          <input class="full-width" type="text" id="cardName"></input>
+          <label class="half-width left">* CARD NUMBER</label>
+          <label class="half-width right">* CVV</label>
+          <input class="half-width left" type="text" id="cardNumber"></input>
+          <input class="half-width right" type="text" id="cvv"></input>
+          <label class="full-width">* EXPIRES</label>
+          <select class="half-width left" id="expiresMonth">
+            <option value="01">01 - January</option>
+            <option value="02">02 - February</option>
+            <option value="03">03 - March</option>
+            <option value="04">04 - April</option>
+            <option value="05">05 - May</option>
+            <option value="06">06 - June</option>
+            <option value="07">07 - July</option>
+            <option value="08">08 - August</option>
+            <option value="09">09 - September</option>
+            <option value="10">10 - October</option>
+            <option value="11">11 - November</option>
+            <option value="12">12 - December</option>
+          </select>
+          <select class="half-width right" id="expiresYear">
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
+            <option value="2027">2027</option>
+            <option value="2028">2028</option>
+          </select>
+          <label class="full-width">GIFT CARDS</label>
+          <textarea type="text" class="input input-giftCards" id="giftCards"></textarea>
+        </div>
+        <div class="div-loadSave">
+          <div class="div-loadSave2">
+            <label class="input input-loadProfile">LOAD PROFILE</label>
+            <label class="input input-testbich">* PROFILE NAME</label>
+            <select class="input input-loadProfile" id="profileSelect">
+            </select>
+            <input class="input input-profileName" type="text" id="profileName"></input>
+            <button class="mid" id="profileSave">Save</label>
+            <button class="right" id="profileRemove">Remove</label>
+          </div>
+        </div>
+      </div>
+      <script>
+      window.$ = window.jQuery = require('jquery');
+      </script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+      <script src="index.js"></script>
     </body>
 </html>
