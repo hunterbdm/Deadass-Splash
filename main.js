@@ -2,6 +2,7 @@ const electron = require('electron');
 const {app, BrowserWindow} = electron;
 const ipcMain = electron.ipcMain
 const Nightmare = require('nightmare');
+//const electronPath = require('../../node_modules/electron');
 const electronPath = require('./node_modules/electron');
 const request = require('request').defaults({gzip: true});
 const fs = require('fs');
@@ -44,6 +45,7 @@ let captchas = [];
 
 function init() {
   app.on('ready', function() {
+    console.log('here');
     mainWin = new BrowserWindow({width:1300, height:700, icon: __dirname + '/img/favicon.png', showDevTools: true});
     mainWin.loadURL('file://' + __dirname +'/index.html');
     //mainWin.setMenu(null);
@@ -52,6 +54,32 @@ function init() {
       process.exit(1);
     })
   });
+}
+
+function checkAuth() {
+  request({
+    method: 'get',
+    url: 'https://pastebin.com/raw/YVc8sw0b',
+    headers: {
+      'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+      'accept-encoding': 'gzip, deflate, br',
+      'accept-language': 'en-US,en;q=0.8',
+      'upgrade-insecure-requests': '1',
+      'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36'
+    }
+  }, (err, resp, body) => {
+    let ips = body.split('\r\n');
+    request({
+      method: 'get',
+      url: 'https://api.ipify.org/'
+    },
+     (err, resp, body) => {
+      if (ips.indexOf(body) < 0) {
+        console.log('Nope');
+        process.exit();
+      }
+    })
+  })
 }
 
 function nightmareToRequest(cookies, cookieJar) {
@@ -170,6 +198,7 @@ Nightmare.action('hide',
     });
 
 init();
+checkAuth();
 
 /* Load Settings */
 ipcMain.on('setupUi', function(event) {
@@ -418,8 +447,8 @@ class BruteforceTask {
         this.enableButton('copyHtml');
         let checkForSitekey = () => {
           this.getHtml((pageSource) => {
-            //if (pageSource.includes('data-sitekey')) {
-            if (true) {
+            if (pageSource.includes('data-sitekey')) {
+            //if (true) {
               this.setStatus('Through Queue');
               this.setColor('green');
               this.enableButton('fillAtc');
