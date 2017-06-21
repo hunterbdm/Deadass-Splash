@@ -17,8 +17,8 @@
     "electron-packager": "^8.7.1"
   },
   "scripts": {
-    "build-osx": "electron-packager . --platform darwin --out ./dist --overwrite",
-    "build-win": "electron-packager . --platform win32 --overwrite --out ./dist && asar pack ./dist/deadass-splash-win32-x64/resources/app ./dist/deadass-splash-win32-x64/resources/app.asar && xcopy \"./node_modules/electron\" \"./dist/deadass-splash-win32-x64/node_modules/electron\" /i /E && rd \"./dist/deadass-splash-win32-x64/resources/app\" /Q /S",
+    "build-osx": "electron-packager . --platform darwin --overwrite --asar --out ./dist ",
+    "build-win": "electron-packager . --platform win32 --overwrite --asar --out ./dist && xcopy \"./node_modules/electron\" \"./dist/deadass-splash-win32-x64/node_modules/electron\" /i /E",
     "start": "electron ."
   },
   "author": "@hunter_bdm",

@@ -47,6 +47,7 @@ function init() {
   app.on('ready', function() {
     console.log('here');
     mainWin = new BrowserWindow({width:1300, height:700, icon: __dirname + '/img/favicon.png', showDevTools: true});
+    mainWin.webContents.openDevTools();
     mainWin.loadURL('file://' + __dirname +'/index.html');
     //mainWin.setMenu(null);
     mainWin.addListener('closed', function() {
@@ -54,32 +55,6 @@ function init() {
       process.exit(1);
     })
   });
-}
-
-function checkAuth() {
-  request({
-    method: 'get',
-    url: 'https://pastebin.com/raw/YVc8sw0b',
-    headers: {
-      'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-      'accept-encoding': 'gzip, deflate, br',
-      'accept-language': 'en-US,en;q=0.8',
-      'upgrade-insecure-requests': '1',
-      'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36'
-    }
-  }, (err, resp, body) => {
-    let ips = body.split('\r\n');
-    request({
-      method: 'get',
-      url: 'https://api.ipify.org/'
-    },
-     (err, resp, body) => {
-      if (ips.indexOf(body) < 0) {
-        console.log('Nope');
-        process.exit();
-      }
-    })
-  })
 }
 
 function nightmareToRequest(cookies, cookieJar) {
@@ -173,6 +148,7 @@ function fixDomain(domain) {
   }
 }
 
+/* Got this from splash party */
 Nightmare.action('show',
     function (name, options, parent, win, renderer, done) {
         parent.respondTo('show', function (done) {
@@ -185,6 +161,7 @@ Nightmare.action('show',
         this.child.call('show', done);
     });
 
+/* Got this from splash party */
 Nightmare.action('hide',
     function (name, options, parent, win, renderer, done) {
         parent.respondTo('hide', function (done) {
@@ -198,15 +175,14 @@ Nightmare.action('hide',
     });
 
 init();
-checkAuth();
 
 /* Load Settings */
 ipcMain.on('setupUi', function(event) {
-  fs.readFile( __dirname + '/settings.json', (err, data) => {
+  fs.readFile('settings.json', (err, data) => {
     settings = JSON.parse(data);
     mainWin.webContents.send('setupUi', JSON.parse(data));
   });
-  fs.readFile( __dirname + '/billing.json', (err, data) => {
+  fs.readFile( 'billing.json', (err, data) => {
     profiles = JSON.parse(data);
     for (p in profiles) {
       switch(profiles[p].country) {
@@ -223,7 +199,7 @@ ipcMain.on('setupUi', function(event) {
 /* Save Settings */
 ipcMain.on('saveSettings', function(event, data) {
   settings = data;
-  fs.writeFile(__dirname + '/settings.json', JSON.stringify(data));
+  fs.writeFile('settings.json', JSON.stringify(data));
 })
 
 /* Save Billing Profile */
@@ -259,8 +235,8 @@ ipcMain.on('saveProfile', function(event, data) {
 
   if (settings.profiles.indexOf(data.profileName) < 0)
     settings.profiles.push(data.profileName);
-  fs.writeFile(__dirname + '/billing.json', JSON.stringify(profiles));
-  fs.writeFile(__dirname + '/settings.json', JSON.stringify(settings));
+  fs.writeFile('billing.json', JSON.stringify(profiles));
+  fs.writeFile('settings.json', JSON.stringify(settings));
 })
 
 /* Remove Billing Profile */
@@ -272,8 +248,8 @@ ipcMain.on('removeProfile', function(event, data) {
       delete profilesUS[data];
     else if(data in profilesUK)
       delete profilesUK[data];
-    fs.writeFile(__dirname + '/billing.json', JSON.stringify(profiles));
-    fs.writeFile(__dirname + '/settings.json', JSON.stringify(settings));
+    fs.writeFile('billing.json', JSON.stringify(profiles));
+    fs.writeFile('settings.json', JSON.stringify(settings));
   }
 })
 
