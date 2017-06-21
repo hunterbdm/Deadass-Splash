@@ -45,11 +45,10 @@ let captchas = [];
 
 function init() {
   app.on('ready', function() {
-    console.log('here');
     mainWin = new BrowserWindow({width:1300, height:700, icon: __dirname + '/img/favicon.png', showDevTools: true});
-    mainWin.webContents.openDevTools();
+    //mainWin.webContents.openDevTools();
     mainWin.loadURL('file://' + __dirname +'/index.html');
-    //mainWin.setMenu(null);
+    mainWin.setMenu(null);
     mainWin.addListener('closed', function() {
       app.exit();
       process.exit(1);

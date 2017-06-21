@@ -19,3 +19,9 @@ I have decided to open source this project. If you are feeling generous and woul
 Paypal: https://www.paypal.me/DTMGall
 
 Cash App: $hunterbdm
+
+[logo]: http://i.imgur.com/Cv5xiEE.png "New Tasks"
+[logo]: http://i.imgur.com/LUJu8n7.png "Bruteforce Tasks"
+[logo]: http://i.imgur.com/9x8bsgI.png "Cart Tasks"
+[logo]: http://i.imgur.com/t88wHpd.png "Settings"
+[logo]: http://i.imgur.com/S8OmsPB.png "Billing"
