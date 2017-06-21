@@ -9,3 +9,12 @@
 
 ## Run
 Double click the start.bat or type `npm start` in cmd
+
+## Proxies
+If you don't want to use proxies, you can enter `localhost` in place where you would normally place a proxy.
+
+## Feeling Generous?
+I have decided to open source this project. If you are feeling generous and would like to donate you can with the links below. It means a lot, thank you. <3
+
+Paypal: https://www.paypal.me/DTMGall
+Cash App: $hunterbdm
