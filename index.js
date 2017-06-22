@@ -54,6 +54,7 @@ const divUK = $('#divUK');
 
 /* Global Settings Elements */
 const apiKeys = $('#apiKeys');
+const gCookies = $('#gCookies');
 const saveSettings = $('#saveSettings');
 
 /* Region Specific Settings Elements */
@@ -440,6 +441,7 @@ saveSettings.click(function(event) {
 
   ipcRenderer.send('saveSettings', {
     apiKeys: apiKeys.val().split('\n').clean(''),
+    gCookies: JSON.parseNoErr(gCookies.val()),
     sitekeyUS: sitekeyUS.val(),
     sitekeyUK: sitekeyUK.val(),
     formJsonUS: formJsonUS.val(),
@@ -547,6 +549,7 @@ ipcRenderer.on('setupUi', function(event, data) {
     apiKeysStr += data.apiKeys[i] + '\n';
   }
   apiKeys.val(apiKeysStr);
+  gCookies.val(JSON.stringify(data.gCookies));
   sitekeyUS.val(data.sitekeyUS);
   sitekeyUK.val(data.sitekeyUK);
   formJsonUS.val(data.formJsonUS);
@@ -588,6 +591,16 @@ Array.prototype.clean = function(deleteValue) {
 Array.prototype.random = function() {
   return this[Math.floor(Math.random() *this.length)];
 }
+
+JSON.parseNoErr = function (str) {
+  try {
+    let parsed = this.parse(str);
+    return parsed;
+  }
+  catch (e) {
+    return [];
+  }
+};
 
 function copyToClipboard(text) {
     if (window.clipboardData && window.clipboardData.setData) {

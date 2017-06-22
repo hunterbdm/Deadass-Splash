@@ -48,7 +48,7 @@ function init() {
     mainWin = new BrowserWindow({width:1300, height:700, icon: __dirname + '/img/favicon.png', showDevTools: true});
     //mainWin.webContents.openDevTools();
     mainWin.loadURL('file://' + __dirname +'/index.html');
-    mainWin.setMenu(null);
+    //mainWin.setMenu(null);
     mainWin.addListener('closed', function() {
       app.exit();
       process.exit(1);
@@ -145,6 +145,15 @@ function fixDomain(domain) {
   else {
     return 'http://' + domain;
   }
+}
+
+function fixCookies(cookies) {
+  for (var i = 0; i < cookies.length; i++) {
+    if(Object.keys(cookies[i]).indexOf('url') < 0) {
+      cookies[i].url = fixDomain(cookies[i].domain);
+    }
+  }
+  return cookies;
 }
 
 /* Got this from splash party */
@@ -417,6 +426,12 @@ class BruteforceTask {
           setTimeout(() => {loadingTasks--;}, 3000);
           doneLoading = true;
         }
+        this.nightmare
+          .cookies.set(fixCookies(settings.gCookies))
+          .then(function() {
+            console.log('here');
+          })
+
         this.setStatus('In Queue');
         this.enableButton('copyCookies');
         this.enableButton('copyHtml');
@@ -435,7 +450,8 @@ class BruteforceTask {
         checkForSitekey();
       })
       .catch((err) => {
-        this.setStatus('Error: ' + err);
+        this.setStatus('Error: ' + err.toString());
+        console.log(err);
         this.setColor('red');
         if(!doneLoading) {
           setTimeout(() => {loadingTasks--;}, 3000);
