@@ -22,6 +22,19 @@ Adding google cookies allows you to get easier captchas in the bruteforce tasks.
 3. While still on gmail, click the Export button in EditThisCookie
 4. Paste into bot settings and save
 
+## FAQ
+Q: Where do I get my 2captcha key?
+A: Sign up on [here](https://2captcha.com/) and add funds
+
+Q: Where do I get the sitekey & form json?
+A: I will post it on [my twitter](https://twitter.com/hunter_bdm) during releases.
+
+Q: When do I start the bot?
+A: Start/Add your bruteforce tasks once stock goes live. Watch the video to understand how the cart tasks work.
+
+Q: Is there a way to get sitekey or form json before release?
+A: No, someone must get through the queue before you are able to get sitekey or form json.
+
 ## Feeling Generous?
 I have decided to open source this project. If you are feeling generous and would like to donate you can with the links below. It means a lot, thank you. <3
 
