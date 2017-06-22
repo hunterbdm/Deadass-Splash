@@ -2,3 +2,5 @@ node_modules
 npm-debug.log
 testing.js
 dist
+settings.json
+billing.json
