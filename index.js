@@ -51,6 +51,7 @@ const stopHarvester = $('#stopHarvester');
 const dropDownRegion = $('#dropdownRegion');
 const divUS = $('#divUS');
 const divUK = $('#divUK');
+const divCZ = $('#divCZ');
 
 /* Global Settings Elements */
 const apiKeys = $('#apiKeys');
@@ -62,6 +63,8 @@ const sitekeyUS = $('#sitekeyUS');
 const formJsonUS = $('#formJsonUS');
 const sitekeyUK = $('#sitekeyUK');
 const formJsonUK = $('#formJsonUK');
+const sitekeyCZ = $('#sitekeyCZ');
+const formJsonCZ = $('#formJsonCZ');
 
 /* Billing Elements */
 const firstName = $('#firstName');
@@ -137,13 +140,13 @@ tabSelectPayment.click(function(event) {
 dropDownRegion.change(function(event) {
   let newVal = dropDownRegion.find(":selected").attr('value');
   switch(newVal) {
-    case 'US':
-      divUS.removeAttr('hidden');
-      divUK.attr('hidden', '');
-      break;
     case 'UK':
       divUK.removeAttr('hidden');
-      divUS.attr('hidden', '');
+      divCZ.attr('hidden', '');
+      break;
+	case 'CZ':
+      divCZ.removeAttr('hidden');
+      divUK.attr('hidden', '');
       break;
   }
 })
@@ -443,9 +446,11 @@ saveSettings.click(function(event) {
     apiKeys: apiKeys.val().split('\n').clean(''),
     gCookies: JSON.parseNoErr(gCookies.val()),
     sitekeyUS: sitekeyUS.val(),
-    sitekeyUK: sitekeyUK.val(),
+    sitekeyUK: sitekeyUK.val(),	
+    sitekeyCZ: sitekeyCZ.val(),
     formJsonUS: formJsonUS.val(),
-    formJsonUK: formJsonUK.val(),
+    formJsonUK: formJsonUK.val(),	
+    formJsonCZ: formJsonCZ.val(),
     profiles: profiles
   });
 })
@@ -457,6 +462,9 @@ country.change(function(event) {
       state.removeAttr('disabled');
       break;
     case 'UK':
+      state.attr('disabled', '');
+      break;
+	case 'CZ':
       state.attr('disabled', '');
       break;
   }
@@ -551,9 +559,11 @@ ipcRenderer.on('setupUi', function(event, data) {
   apiKeys.val(apiKeysStr);
   gCookies.val(JSON.stringify(data.gCookies));
   sitekeyUS.val(data.sitekeyUS);
-  sitekeyUK.val(data.sitekeyUK);
+  sitekeyUK.val(data.sitekeyUK);  
+  sitekeyCZ.val(data.sitekeyCZ);
   formJsonUS.val(data.formJsonUS);
-  formJsonUK.val(data.formJsonUK);
+  formJsonUK.val(data.formJsonUK);  
+  formJsonCZ.val(data.formJsonCZ);
 
   let option = $(document.createElement('option'));
   option.text('');
