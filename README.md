@@ -1,5 +1,6 @@
 # DeadAss-Splash
-
+///Added locale for Czech Republic, hopefuly havent missed something.
+///All credits goes to creator
 ## Setup (Video Tutorial Below)
 
 1. Install NodeJS (LTS) @ https://nodejs.org/en/ and use all default settings.
