@@ -10,25 +10,26 @@ const cheerio = require('cheerio')
 
 const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3128.0 Safari/537.36';
 const sizeIds = {
-    '36': '_540',
-    '37': '_550',
-    '38': '_560',
-    '38,5': '_570',
-    '39': '_580',
-    '40': '_590',
-    '40,5': '_600',
-    '41': '_610',
-    '42': '_620',
-    '42,5': '_630',
-    '43': '_640',
-    '44': '_650',
-    '44,5': '_660',
-    '45': '_670',
-    '46': '_680',
-    '46,5': '_690',
-    '47': '_700',
-    '48': '_710',
-    '49': '_730',
+    '4.5': '_540',
+    '5': '_550',
+    '5.5': '_560',
+    '6': '_570',
+    '6.5': '_580',
+    '7': '_590',
+    '7.5': '_600',
+    '8': '_610',
+    '8.5': '_620',
+    '9': '_630',
+    '9.5': '_640',
+    '10': '_650',
+    '10.5': '_660',
+    '11': '_670',
+    '11.5': '_680',
+    '12': '_690',
+    '12.5': '_700',
+    '13': '_710',
+    '14': '_730',
+    '15': '_750',
 }
 
 let mainWin;
@@ -37,7 +38,6 @@ let settings = {};
 let profiles = {};
 let profilesUS = {};
 let profilesUK = {};
-let profilesCZ = {};
 
 let loadingTasks = 0;
 
@@ -199,9 +199,6 @@ ipcMain.on('setupUi', function(event) {
           break;
         case 'UK':
           profilesUK[p] = profiles[p];
-		  break;
-        case 'CZ':
-          profilesCZ[p] = profiles[p];
       }
     }
   });
@@ -242,9 +239,6 @@ ipcMain.on('saveProfile', function(event, data) {
       break;
     case 'UK':
       profilesUK[data.profileName] = profile;
-	  break;
-    case 'CZ':
-      profilesCZ[data.profileName] = profile;
   }
 
   if (settings.profiles.indexOf(data.profileName) < 0)
@@ -297,13 +291,9 @@ ipcMain.on('startHarvester', function(event, data) {
           sitekey = settings.sitekeyUK;
           url = 'http://www.adidas.co.uk';
           break;
-		case 'CZ':
-          sitekey = settings.sitekeyCZ;
-          url = 'http://www.adidas.cz';
-          break;
         default:
-          sitekey = settings.sitekeyCZ;
-          url = 'http://www.adidas.cz';
+          sitekey = settings.sitekeyUS;
+          url = 'http://www.adidas.com';
           break;
       }
       getCaptcha(settings.apiKeys.random(), sitekey, url, (captchaRes) => {
@@ -549,9 +539,6 @@ class CartTask {
         case 'UK':
           this.startUK();
           break;
-		case 'CZ':
-          this.startCZ();
-          break;
         default:
           this.setStatus('Invalid Region');
           break;
@@ -588,9 +575,6 @@ class CartTask {
             break;
           case 'UK':
             this.openBrowserUK();
-            break;
-		  case 'CZ':
-            this.openBrowserCZ();
             break;
         }
       })
@@ -1099,355 +1083,6 @@ class CartTask {
     }
     callback(cookiesJson);
   }
-  
-  startCZ() {
-    let setCookies = () => {
-      /* These cookies define a cart session, and we don't want to transfer cart cookies, only cookies such as hmac */
-      const noTransferCookies = [
-        'dwsecuretoken_348f5713099a7e057c63cda5316361d6',
-        'restoreBasketUrl',
-        'RES_SESSIONID',
-        'RES_TRACKINGID',
-        'sid',
-        'dwsid',
-        'dm_mi',
-        'RT',
-        'ak_bmsc',
-        'dwac_bcLgoiaagSiuAaaac7K5UQXd02',
-        'dwanonymous_348f5713099a7e057c63cda5316361d6'
-      ]
-      this.setStatus('Setting Cookies');
-      let cookiesToAdd = [];
-      for (var i = 0; i < this.cookies.length; i++) {
-        if(noTransferCookies.indexOf(this.cookies[i].name) < 0)
-          cookiesToAdd.push(this.cookies[i]);
-      }
-      nightmareToRequest(cookiesToAdd, this.cookieJar);
-      atc()
-    }
-
-    function waitForCaptcha(callback) {
-      if (captchas.length > 1)
-        callback(captchas.pop());
-      else
-        setTimeout(() => {
-          waitForCaptcha(callback)
-        }, 250)
-    }
-
-    let atc = () => {
-      this.setStatus('Getting Captcha');
-      waitForCaptcha((captchaRes) => {
-        this.setStatus('Attempting Atc');
-        let sizeSku = this.sku + sizeIds[this.size];
-        let formJson = settings['formJsonCZ'];
-        formJson = formJson.replace('{$sku}', this.sku);
-        formJson = formJson.replace('{$captcha}', captchaRes);
-        formJson = formJson.replace('{$sizeSku}', sizeSku);
-        formJson = JSON.parse(formJson);
-        //mainWin.webContents.send('copy' , formJson['action']);
-        /* ATC */
-        request({
-          method: 'post',
-          url: formJson['action'],
-          jar: this.cookieJar,
-          proxy: this.proxy == 'localhost' ? undefined : this.proxyFormatted,
-          headers: {
-              'Accept': '*/*',
-              'Accept-Encoding': 'gzip, deflate',
-              'Accept-Language': 'cs-CZ,cs;q=0.8',
-              'Connection': 'keep-alive',
-              'Content-Type' :'application/x-www-form-urlencoded; charset=UTF-8',
-              'User-Agent': userAgent,
-              'X-Requested-With': 'XMLHttpRequest'
-          },
-          qs: formJson.form_data,
-          followAllRedirects: true
-        }, (err, resp, body) => {
-          if(err) {
-              this.setStatus('ATC Failed: ' + err);
-              this.setColor('red');
-          }
-          else if(resp.statusCode != 200) {
-              this.setStatus('ATC Failed: ' + resp.statusCode);
-              this.setColor('red');
-          }
-          else {
-            /* Check Cart */
-            this.setStatus('Checking Cart');
-            this.enableButton('copyCookies');
-            this.enableButton('openBrowser');
-
-            request({
-              method: 'get',
-              url: 'http://www.adidas.cz/on/demandware.store/Sites-adidas-CZ-Site/default/Cart-ProductCount',
-              jar: this.cookieJar,
-              proxy: this.proxy == 'localhost' ? undefined : this.proxyFormatted,
-              headers: {
-                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-                'Accept-Encoding': 'gzip, deflate',
-                'Accept-Language': 'cs-CZ,cs;q=0.8',
-                'Connection': 'keep-alive',
-                'Upgrade-Insecure-Requests': '1',
-                'User-Agent': userAgent
-              }
-            }, (err, resp, body) => {
-              if(err) {
-                this.setStatus('Cart Check Failed: ' + err);
-              }
-              else if(resp.statusCode != 200) {
-                this.setStatus('Cart Check Failed: ' + resp.statusCode);
-              }
-              else {
-                body = body.replace(/\s+/g, " ").trim();
-                body = body.replace('"', '').replace('"', '');
-                if(body == '1') {
-                  this.setStatus('ATC Success');
-                  this.setColor('green');
-                  /* Disabled For Now */
-                  //checkout();
-                }
-                else {
-                  this.setStatus('ATC Failed');
-                  this.setColor('red');
-                }
-              }
-            })
-          }
-        })
-      })
-    }
-
-    let checkout = () => {
-      if (Object.keys(profilesCZ).length > 0) {
-        let profile = profilesCZ[Object.keys(profilesCZ)[0]];
-        delete profilesUS[Object.keys(profilesCZ)[0]];
-
-        this.setStatus('Starting Checkout');
-
-        request({
-          method: 'get',
-          url: 'https://www.adidas.cz/on/demandware.store/Sites-adidas-CZ-Site/cs_CZ/COShipping-Show',
-          jar: this.cookieJar,
-          proxy: this.proxy == 'localhost' ? undefined : this.proxyFormatted,
-          headers: {
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-          	'Accept-Encoding': 'gzip, deflate, br',
-          	'Accept-Language': 'cs-CZ,cs;q=0.8',
-          	'Connection': 'keep-alive',
-          	'Host': 'www.adidas.cz',
-          	'Referer': 'https://www.adidas.cz/on/demandware.store/Sites-adidas-CZ-Site/cs_CZ/Cart-Show',
-          	'Upgrade-Insecure-Requests': '1',
-          	'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3128.0 Safari/537.36'
-          }
-        }, (err, resp, body) => {
-          if (err) {
-            this.setStatus('Checkout Failed ' + err.toString())
-          }
-          else if (resp.statusCode !== 200) {
-            this.setStatus('Checkout Failed ' + resp.statusCode)
-          }
-          else {
-            let $ = cheerio.load(body);
-            this.setStatus('Sending Shipping Data');
-
-            request({
-              method: 'post',
-              url: $('#dwfrm_delivery').attr('action'),
-              jar: this.cookieJar,
-              proxy: this.proxy == 'localhost' ? undefined : this.proxyFormatted,
-              headers: {
-                'Accept': 'text/html, */*; q=0.01',
-                'Accept-Encoding': 'gzip, deflate, br',
-                'Accept-Language': 'cs-CZ,cs;q=0.8',
-                'Connection': 'keep-alive',
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                'Host': 'www.adidas.cz',
-                'Origin': 'https://www.adidas.cz',
-                'Referer': 'https://www.adidas.cz/on/demandware.store/Sites-adidas-CZ-Site/cs_CZ/COShipping-Show',
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3128.0 Safari/537.36',
-                'X-Requested-With': 'XMLHttpRequest'
-              },
-              formData: {
-                'dwfrm_delivery_shippingOriginalAddress' : $('#dwfrm_delivery_shippingOriginalAddress').attr('value'),
-                'dwfrm_delivery_shippingSuggestedAddress' : $('#dwfrm_delivery_shippingSuggestedAddress').attr('value'),
-                'dwfrm_delivery_singleshipping_shippingAddress_isedited' : $('#dwfrm_delivery_singleshipping_shippingAddress_isedited').attr('value'),
-                'dwfrm_delivery_singleshipping_shippingAddress_addressFields_firstName': profile.firstName,
-              	'dwfrm_delivery_singleshipping_shippingAddress_addressFields_lastName': profile.lastName,
-              	'dwfrm_delivery_singleshipping_shippingAddress_addressFields_address1': profile.address1,
-              	'dwfrm_delivery_singleshipping_shippingAddress_addressFields_address2': profile.address2,
-              	'dwfrm_delivery_singleshipping_shippingAddress_addressFields_city': profile.city,
-              	'dwfrm_delivery_singleshipping_shippingAddress_addressFields_countyProvince': profile.state,
-              	'state[]': '',
-              	'state[]': '',
-              	'dwfrm_delivery_singleshipping_shippingAddress_addressFields_zip': profile.zip,
-              	'dwfrm_delivery_singleshipping_shippingAddress_addressFields_phone': profile.phone,
-              	'dwfrm_delivery_singleshipping_shippingAddress_useAsBillingAddress': 'true',
-                'dwfrm_delivery_securekey': $('[name="dwfrm_delivery_securekey"]').attr('value'),
-                'dwfrm_delivery_billingOriginalAddress': 'false',
-                'dwfrm_delivery_billingSuggestedAddress': 'false',
-                'dwfrm_delivery_billing_billingAddress_isedited': 'false',
-                'dwfrm_delivery_billing_billingAddress_addressFields_country': profile.country,
-                'dwfrm_delivery_billing_billingAddress_addressFields_firstName': profile.firstName,
-                'dwfrm_delivery_billing_billingAddress_addressFields_lastName': profile.lastName,
-                'dwfrm_delivery_billing_billingAddress_addressFields_address1': profile.address1,
-                'dwfrm_delivery_billing_billingAddress_addressFields_address2': profile.address2,
-                'dwfrm_delivery_billing_billingAddress_addressFields_city': profile.city,
-                'dwfrm_delivery_billing_billingAddress_addressFields_countyProvince': profile.state,
-                'dwfrm_delivery_billing_billingAddress_addressFields_zip': profile.zip,
-                'dwfrm_delivery_billing_billingAddress_addressFields_phone': profile.phone,
-                'dwfrm_delivery_singleshipping_shippingAddress_email_emailAddress': profile.email,
-                'signup_source': $('[name="signup_source"]').attr('value'),
-                'dwfrm_delivery_singleshipping_shippingAddress_ageConfirmation': 'true',
-                'shipping-group-0': $('#shipping-method-0-0').attr('value'),
-                'dwfrm_cart_shippingMethodID_0': $('[name="dwfrm_cart_shippingMethodID_0"]').attr('value'),
-                'shippingMethodType_0': $('[name="shippingMethodType_0"]').attr('value'),
-                'dwfrm_cart_selectShippingMethod': $('#dwfrm_cart_selectShippingMethod').attr('value'),
-                'referer': 'Cart-Show',
-                'dwfrm_delivery_savedelivery': $('#dwfrm_delivery_savedelivery').attr('value'),
-                'format': 'ajax'
-              },
-              followAllRedirects: true
-            }, (err, resp, body) => {
-              if (err) {
-                this.setStatus('Checkout Failed 2' + err.toString())
-              }
-              else if (resp.statusCode !== 200) {
-                this.setStatus('Checkout Failed 2' + resp.statusCode)
-              }
-              else {
-                request({
-                  method: 'get',
-                  url: 'https://www.adidas.cz/on/demandware.store/Sites-adidas-CZ-Site/cs_CZ/COSummary-Start',
-                  jar: this.cookieJar,
-                  proxy: this.proxy == 'localhost' ? undefined : this.proxyFormatted,
-                  headers: {
-                    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-                    'Accept-Encoding': 'gzip, deflate, br',
-                    'Accept-Language': 'cs-CZ,cs;q=0.8',
-                    'Connection': 'keep-alive',
-                    'Host': 'www.adidas.com',
-                    'Referer': 'https://www.adidas.cz/on/demandware.store/Sites-adidas-CZ-Site/cs_CZ/COShipping-Show',
-                    'Upgrade-Insecure-Requests': '1',
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3128.0 Safari/537.36'
-                  }
-                }, (err, resp, body) => {
-                  if (err) {
-                    this.setStatus('Checkout Failed 3' + err.toString())
-                  }
-                  else if (resp.statusCode !== 200) {
-                    this.setStatus('Checkout Failed 3' + resp.statusCode)
-                  }
-                  else {
-                    console.log('To payment screen');
-                    console.log(resp.request.href)
-                    $ = cheerio.load(body);
-
-                    let addGiftCard = (card, first) => {
-                      this.setStatus('Adding Gift Card')
-                      console.log('Adding Gift Card ' + card);
-
-                      let s = card.split(':');
-                      let cardNum = s[0];
-                      let cardPin = s[1];
-
-                      let formData = {
-                        'dwfrm_payment_svsGiftCards_newGiftcardNumber': cardNum,
-                        'dwfrm_payment_svsGiftCards_newGiftcardPin': cardPin,
-                        'dwfrm_payment_applygiftcard': 'Apply',
-                        'dwfrm_payment_securekey': $('[name="dwfrm_payment_securekey"]').attr('value')
-                      }
-                      if(!first)
-                        formData['dwfrm_payment_svsGiftCards_usegiftcard'] = 'true';
-
-                      request({
-                        method: 'post',
-                        url: $('#dwfrm_payment_svsGiftCards').attr('action'),
-                        jar: this.cookieJar,
-                        proxy: this.proxy == 'localhost' ? undefined : this.proxyFormatted,
-                        headers: {
-                          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-                          'Accept-Encoding': 'gzip, deflate, br',
-                          'Accept-Language': 'cs-CZ,cs;q=0.8',
-                          'Connection': 'keep-alive',
-                          'Content-Type': 'application/x-www-form-urlencoded',
-                          'Host': 'www.adidas.cz',
-                          'Origin': 'https://www.adidas.cz',
-                          'Upgrade-Insecure-Requests': '1',
-                          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3128.0 Safari/537.36'
-                        },
-                        formData: formData,
-                        followAllRedirects: true
-                      }, (err, resp, body) => {
-                        if (err) {
-                          this.setStatus('Add Gift Card Failed' + err.toString())
-                        }
-                        else if (resp.statusCode !== 200) {
-                          this.setStatus('Add Gift Card Failed' + resp.statusCode)
-                        }
-                        else {
-                          console.log(resp.request.href);
-                          $ = cheerio.load(body);
-                          if (profile.giftCards.length > 0)
-                            addGiftCard(profile.giftCards.pop(), false)
-                          else {
-                            this.setStatus('Done Adding Cards')
-                            checkoutGiftcards();
-                          }
-                        }
-                      })
-                    }
-
-                    let checkoutGiftcards = () => {
-                      request({
-                        method: 'post',
-                        url: $('#dwfrm_payment_svsGiftCards').attr('action'),
-                        jar: this.cookieJar,
-                        proxy: this.proxy == 'localhost' ? undefined : this.proxyFormatted,
-                        headers: {
-                          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-                          'Accept-Encoding': 'gzip, deflate, br',
-                          'Accept-Language': 'cs-CZ,cs;q=0.8',
-                          'Connection': 'keep-alive',
-                          'Content-Type': 'application/x-www-form-urlencoded',
-                          'Host': 'www.adidas.cz',
-                          'Origin': 'https://www.adidas.cz',
-                          'Upgrade-Insecure-Requests': '1',
-                          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3128.0 Safari/537.36'
-                        },
-                        formData: {
-                          'dwfrm_payment_svsGiftCards_usegiftcard': 'true',
-                          'selectedPaymentMethodID': $('[name="selectedPaymentMethodID"]').attr('value'),
-                          'dwfrm_payment_giftcardpayment': '',
-                          'dwfrm_payment_securekey': $('[name="dwfrm_payment_securekey"]').attr('value')
-                        }
-                      }, (err, resp, body) => {
-                        if (err) {
-                          this.setStatus('Checkout Failed ' + err.toString())
-                        }
-                        else if (resp.statusCode !== 200) {
-                          this.setStatus('Checkout Failed ' + resp.statusCode)
-                        }
-                        else {
-                          this.setStatus('Checkout Complete');
-                          this.setColor('orange');
-                        }
-                      })
-                    }
-
-                    if (profile.giftCards.length > 0)
-                      addGiftCard(profile.giftCards.pop(), true);
-                  }
-                })
-              }
-            })
-          }
-        })
-      }
-    }
-
-    setCookies();
-  }
 
   openBrowserUS() {
     let nightmare;
@@ -1522,47 +1157,6 @@ class CartTask {
             nightmare
               .show()
               .goto('https://www.adidas.co.uk/on/demandware.store/Sites-adidas-GB-Site/en_GB/Cart-Show')
-              .then(function() {})
-          }, 1000)
-          nightmare
-            .cookies.set(cookies)
-            .then(function() {})
-        })
-    })
-  }
-  
-  openBrowserCZ() {
-    let nightmare;
-
-    if(this.proxy != 'localhost') {
-      const proxySplit = this.proxy.split(':');
-      nightmare = new Nightmare({
-        show: false,
-        electronPath: electronPath,
-        switches: {
-            'proxy-server': proxySplit[0] + ':' + proxySplit[1]
-        }
-      });
-      /* Add Authentication if proxy used user:pass */
-      if (proxySplit.length > 2) {
-        nightmare.authentication(proxySplit[2], proxySplit[3]);
-      }
-    }
-    else
-      nightmare = new Nightmare({
-        show: false,
-        electronPath: electronPath
-      });
-
-    this.getCookies((cookies) => {
-      nightmare
-        .useragent(userAgent)
-        .goto('about:blank')
-        .then(() => {
-          setTimeout(() => {
-            nightmare
-              .show()
-              .goto('https://www.adidas.cz/on/demandware.store/Sites-adidas-CZ-Site/default/Cart-Show')
               .then(function() {})
           }, 1000)
           nightmare
