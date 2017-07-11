@@ -63,28 +63,6 @@ const formJsonUS = $('#formJsonUS');
 const sitekeyUK = $('#sitekeyUK');
 const formJsonUK = $('#formJsonUK');
 
-/* Billing Elements */
-const firstName = $('#firstName');
-const lastName = $('#lastName');
-const address1 = $('#address1');
-const address2 = $('#address2');
-const city = $('#city');
-const zip = $('#zip');
-const country = $('#country');
-const state = $('#state');
-const phone = $('#phone');
-const email = $('#email');
-const cardName = $('#cardName');
-const cardNumber = $('#cardNumber');
-const cvv = $('#cvv');
-const expiresMonth = $('#expiresMonth');
-const expiresYear = $('#expiresYear');
-const giftCards = $('#giftCards');
-const profileSelect = $('#profileSelect');
-const profileName = $('#profileName');
-const profileSave = $('#profileSave');
-const profileRemove = $('#profileRemove');
-
 /* Tasks Indexs */
 let bruteforceIndex = 0;
 let cartIndex = 0;
@@ -147,27 +125,6 @@ dropDownRegion.change(function(event) {
       break;
   }
 })
-
-function clearBilling() {
-  firstName.val('');
-  lastName.val('');
-  address1.val('');
-  address2.val('');
-  city.val('');
-  zip.val('');
-  country.val('United States');
-  state.val('State');
-  state.removeAttr('disabled');
-  phone.val('');
-  email.val('');
-  cardName.val('');
-  cardNumber.val('');
-  cvv.val('');
-  expiresMonth.val('01 - January');
-  expiresYear.val('2017');
-  giftCards.val('');
-  profileName.val('');
-}
 
 /*
 <tr>
@@ -431,106 +388,14 @@ removeAllCartTasks.click(function(event) {
 
 /* Save Settings */
 saveSettings.click(function(event) {
-  let profiles = [];
-  let children = profileSelect.children();
-  for (var i = 0; i < children.length; i++) {
-    if (children[i].text != '') {
-      profiles.push(children[i].text);
-    }
-  }
-
   ipcRenderer.send('saveSettings', {
     apiKeys: apiKeys.val().split('\n').clean(''),
     gCookies: JSON.parseNoErr(gCookies.val()),
     sitekeyUS: sitekeyUS.val(),
     sitekeyUK: sitekeyUK.val(),
     formJsonUS: formJsonUS.val(),
-    formJsonUK: formJsonUK.val(),
-    profiles: profiles
+    formJsonUK: formJsonUK.val()
   });
-})
-
-/* Enable & Disable state select */
-country.change(function(event) {
-  switch(country.val()) {
-    case 'US':
-      state.removeAttr('disabled');
-      break;
-    case 'UK':
-      state.attr('disabled', '');
-      break;
-  }
-})
-
-/* Save Billing Profile */
-profileSave.click(function(event) {
-  if (profileName.val() !== '') {
-    ipcRenderer.send('saveProfile', {
-      profileName: profileName.val(),
-      firstName: firstName.val(),
-      lastName: lastName.val(),
-      address1: address1.val(),
-      address2: address2.val(),
-      city: city.val(),
-      zip: zip.val(),
-      country: country.val(),
-      state: state.val(),
-      phone: phone.val(),
-      email: email.val(),
-      cardName: cardName.val(),
-      cardNumber: cardNumber.val(),
-      cvv: cvv.val(),
-      expiresMonth: expiresMonth.val(),
-      expiresYear: expiresYear.val(),
-      giftCards: giftCards.val().split('\n').clean('')
-    })
-    if($('#profile' + profileName.val().replaceAll(' ', '_')).length == 0) {
-      let option = $(document.createElement('option'));
-      option.text(profileName.val());
-      option.attr('id', 'profile' + profileName.val().replaceAll(' ', '_'));
-      profileSelect.append(option);
-    }
-  }
-})
-
-/* Remove Billing Profile */
-profileRemove.click(function(event) {
-  ipcRenderer.send('removeProfile', profileName.val());
-  $('#profile' + profileName.val().replaceAll(' ', '_')).remove();
-  clearBilling();
-})
-
-/* Load Billing Profile */
-profileSelect.change(function(event) {
-  if (profileSelect.val() == '') {
-    clearBilling();
-  }
-  else {
-    ipcRenderer.once(profileSelect.val() + 'profileData', function(event, data) {
-      firstName.val(data.firstName);
-      lastName.val(data.lastName);
-      address1.val(data.address1);
-      address2.val(data.address2);
-      city.val(data.city);
-      zip.val(data.zip);
-      country.val(data.country);
-      state.val(data.state);
-      phone.val(data.phone);
-      email.val(data.email);
-      cardName.val(data.cardName);
-      cardNumber.val(data.cardNumber);
-      cvv.val(data.cvv);
-      expiresMonth.val(data.expiresMonth);
-      expiresYear.val(data.expiresYear);
-      let giftCardStr = '';
-      for (var i = 0; i < data.giftCards.length; i++) {
-        giftCardStr += data.giftCards[i] + '\n'
-      }
-      giftCards.val(giftCardStr);
-      profileName.val(profileSelect.val());
-    })
-    ipcRenderer.send('requestProfile', profileSelect.val())
-  }
 })
 
 /* Fill Atc */
@@ -554,17 +419,6 @@ ipcRenderer.on('setupUi', function(event, data) {
   sitekeyUK.val(data.sitekeyUK);
   formJsonUS.val(data.formJsonUS);
   formJsonUK.val(data.formJsonUK);
-
-  let option = $(document.createElement('option'));
-  option.text('');
-  profileSelect.append(option);
-
-  for (var i = 0; i < data.profiles.length; i++) {
-    option = $(document.createElement('option'));
-    option.text(data.profiles[i]);
-    option.attr('id', 'profile' + data.profiles[i].replaceAll(' ', '_'));
-    profileSelect.append(option);
-  }
 })
 
 ipcRenderer.send('setupUi', {});

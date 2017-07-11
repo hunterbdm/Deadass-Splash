@@ -85,7 +85,7 @@ input, textarea, select, button {
 .div-tabSelect {
   padding-top:  5px;
   padding-bottom:  5px;
-  width: calc(100% / 5);
+  width: calc(100% / 4);
   height: 100%;
   float: left;
   border: 1px solid #1E1E1E;
