@@ -133,7 +133,11 @@
           <label>2Captcha API Keys</label>
           <textarea id="apiKeys" class="input input-apikeys"></textarea>
           <label>Google Cookies (NOT REQUIRED)</label>
-          <textarea id="gCookies" class="input input-apikeys"></textarea>
+          <textarea id="gCookies" class="input input-gcookies"></textarea>
+          <label>HMAC Cookie Name</label>
+          <input type="text" id="hmacName" class="input input-hmacName full-width">
+          <label>User Agent (Don't change if you don't know what you're doing)</label>
+          <input type="text" id="userAgent" class="input input-useragent full-width">
           <button type="button" name="button" id="saveSettings">Save</button>
         </div>
         <div class="half-width full-height right">
@@ -145,14 +149,18 @@
           <div class="div-region" id="divUS">
             <label>Sitekey</label>
             <input type="text" id="sitekeyUS" class="input input-sitekey full-width">
-            <label>Form JSON</label>
-            <textarea id="formJsonUS" class="input input-formJson"></textarea>
+            <label>Client ID</label>
+            <input type="text" id="clientIdUS" class="input input-clientid full-width">
+            <label>Captcha Duplicate</label>
+            <input type="text" id="capdupUS" class="input input-capdup full-width">
           </div>
           <div class="div-region" id="divUK" hidden>
             <label>Sitekey</label>
             <input type="text" id="sitekeyUK" class="input input-sitekey full-width">
-            <label>Form JSON</label>
-            <textarea id="formJsonUK" class="input input-formJson"></textarea>
+            <label>Client ID</label>
+            <input type="text" id="clientIdUK" class="input input-clientid full-width">
+            <label>Captcha Duplicate</label>
+            <input type="text" id="capdupUK" class="input input-capdup full-width">
           </div>
         </div>
       </div>

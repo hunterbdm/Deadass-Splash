@@ -2,13 +2,13 @@ const electron = require('electron');
 const {app, BrowserWindow} = electron;
 const ipcMain = electron.ipcMain
 const Nightmare = require('nightmare');
-//const electronPath = require('../../node_modules/electron');
 const electronPath = require('./node_modules/electron');
 const request = require('request').defaults({gzip: true});
 const fs = require('fs');
 const cheerio = require('cheerio')
+const cookieHelper = require('./cookieHelper.js')
 
-const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3128.0 Safari/537.36';
+//const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3128.0 Safari/537.36';
 const sizeIds = {
     '4.5': '_540',
     '5': '_550',
@@ -51,38 +51,6 @@ function init() {
       process.exit(1);
     })
   });
-}
-
-function nightmareToRequest(cookies, cookieJar) {
-  for (var c = 0; c < cookies.length; c++) {
-    let cookie = cookies[c];
-    if (!cookie)
-      continue;
-    //mainWin.webContents.send('copy' , cookie.domain);
-    let cString = cookie.name + '=' + cookie.value + '; ';
-    if (cookie.domain)
-      cString += 'Domain=' + cookie.domain + '; ';
-    if (cookie.expirationDate)
-      cString += 'Expires=' + new Date( cookie.expirationDate * 1000) + '; ';
-    if (cookie.path)
-      cString += 'Path=' + cookie.path + '; ';
-    if (cookie.httpOnly)
-      cString += 'HttpOnly'
-
-    //mainWin.webContents.send('copy' , cString);
-
-    if(cookie.domain.startsWith('www')) {
-      cookie.domain = 'http://' + cookie.domain;
-    }
-    else if(cookie.domain.startsWith('.')) {
-      cookie.domain = 'http://www' + cookie.domain;
-    }
-    else {
-      cookie.domain = 'http://' + cookie.domain;
-    }
-
-    cookieJar.setCookie(request.cookie(cString), cookie.domain);
-  }
 }
 
 function getCaptcha(apikey, sitekey, url, callback) {
@@ -132,27 +100,6 @@ function getCaptcha(apikey, sitekey, url, callback) {
       });
 }
 
-function fixDomain(domain) {
-  if(domain.startsWith('www')) {
-    return 'http://' + domain;
-  }
-  else if(domain.startsWith('.')) {
-    return 'http://www' + domain;
-  }
-  else {
-    return 'http://' + domain;
-  }
-}
-
-function fixCookies(cookies) {
-  for (var i = 0; i < cookies.length; i++) {
-    if(Object.keys(cookies[i]).indexOf('url') < 0) {
-      cookies[i].url = fixDomain(cookies[i].domain);
-    }
-  }
-  return cookies;
-}
-
 /* Got this from splash party */
 Nightmare.action('show',
     function (name, options, parent, win, renderer, done) {
@@ -165,6 +112,7 @@ Nightmare.action('show',
     function (done) {
         this.child.call('show', done);
     });
+
 
 /* Got this from splash party */
 Nightmare.action('hide',
@@ -207,36 +155,27 @@ ipcMain.on('newCartTask', function(event, data) {
 
 /* Start Harvester */
 ipcMain.on('startHarvester', function(event, data) {
-  let i = setInterval(() => {
-    for (var i = 0; i < data.threads; i++) {
-      let sitekey;
-      let url;
-      switch(data.region) {
-        case 'US':
-          sitekey = settings.sitekeyUS;
-          url = 'http://www.adidas.com';
-          break;
-        case 'UK':
-          sitekey = settings.sitekeyUK;
-          url = 'http://www.adidas.co.uk';
-          break;
-        default:
-          sitekey = settings.sitekeyUS;
-          url = 'http://www.adidas.com';
-          break;
-      }
-      getCaptcha(settings.apiKeys.random(), sitekey, url, (captchaRes) => {
-        captchas.push(captchaRes);
-        setTimeout(() => {
-          if (captchas.indexOf(captchaRes) > 0) {
-            captchas.splice(captchas.indexOf(captchaRes), 1);
-          }
-        }, 115000);
-      })
-    }
-  }, 15000);
+  let sitekey;
+  let url;
+
+  switch(data.region) {
+    case 'US':
+      sitekey = settings.sitekeyUS;
+      url = 'http://www.adidas.com';
+      break;
+    case 'UK':
+      sitekey = settings.sitekeyUK;
+      url = 'http://www.adidas.co.uk';
+      break;
+    default:
+      sitekey = settings.sitekeyUS;
+      url = 'http://www.adidas.com';
+      break;
+  }
+  let harvester = captchaHelper.startHarvester(data.apiKeys.random(), data.sitekey, url, data.threads)
+
   ipcMain.once('stopHarvester', function(event, data) {
-    clearInterval(i);
+    clearInterval(harvester);
   })
 })
 
@@ -348,7 +287,7 @@ class BruteforceTask {
     this.setStatus('Loading')
 
     this.nightmare
-      .useragent(userAgent)
+      .useragent(settings.userAgent)
       .goto(this.splashUrl)
       .then(() => {
         if(!doneLoading) {
@@ -356,9 +295,9 @@ class BruteforceTask {
           doneLoading = true;
         }
         this.nightmare
-          .cookies.set(fixCookies(settings.gCookies))
+          .cookies.set(cookieHelper.fixCookies(settings.gCookies))
           .then(function() {
-            console.log('here');
+            //console.log('here');
           })
 
         this.setStatus('In Queue');
@@ -367,7 +306,6 @@ class BruteforceTask {
         let checkForSitekey = () => {
           this.getHtml((pageSource) => {
             if (pageSource.includes('data-sitekey')) {
-            //if (true) {
               this.setStatus('Through Queue');
               this.setColor('green');
               this.enableButton('fillAtc');
@@ -535,7 +473,7 @@ class CartTask {
         if(noTransferCookies.indexOf(this.cookies[i].name) < 0)
           cookiesToAdd.push(this.cookies[i]);
       }
-      nightmareToRequest(cookiesToAdd, this.cookieJar);
+      cookieHelper.nightmareToRequest(cookiesToAdd, this.cookieJar);
       atc()
     }
 
@@ -571,7 +509,7 @@ class CartTask {
               'Accept-Language': 'en-US,en;q=0.8',
               'Connection': 'keep-alive',
               'Content-Type' :'application/x-www-form-urlencoded; charset=UTF-8',
-              'User-Agent': userAgent,
+              'User-Agent': settings.userAgent,
               'X-Requested-With': 'XMLHttpRequest'
           },
           qs: formJson.form_data,
@@ -602,7 +540,7 @@ class CartTask {
                 'Accept-Language': 'en-US,en;q=0.8',
                 'Connection': 'keep-alive',
                 'Upgrade-Insecure-Requests': '1',
-                'User-Agent': userAgent
+                'User-Agent': settings.userAgent
               }
             }, (err, resp, body) => {
               if(err) {
@@ -655,7 +593,7 @@ class CartTask {
           cookiesToAdd.push(this.cookies[i]);
       }
 
-      nightmareToRequest(cookiesToAdd, this.cookieJar);
+      cookieHelper.nightmareToRequest(cookiesToAdd, this.cookieJar);
       atc();
     }
 
@@ -690,7 +628,7 @@ class CartTask {
               'Accept-Language': 'en-US,en;q=0.8',
               'Connection': 'keep-alive',
               'Content-Type' :'application/x-www-form-urlencoded; charset=UTF-8',
-              'User-Agent': userAgent,
+              'User-Agent': settings.userAgent,
               'X-Requested-With': 'XMLHttpRequest'
           },
           qs: formJson.form_data,
@@ -720,7 +658,7 @@ class CartTask {
                 'Accept-Language': 'en-US,en;q=0.8',
                 'Connection': 'keep-alive',
                 'Upgrade-Insecure-Requests': '1',
-                'User-Agent': userAgent
+                'User-Agent': settings.userAgent
               }
             }, (err, resp, body) => {
               if(err) {
@@ -771,7 +709,7 @@ class CartTask {
                   'name': cookie.key,
                   'value': cookie.value,
                   'domain': cookie.domain,
-                  'url': fixDomain(cookie.domain),
+                  'url': cookieHelper.fixDomain(cookie.domain),
                   'expirationDate': cookie.expires ? new Date(cookie.expires).getTime()/1000.0 : 9912726715,
                   'httpOnly': cookie.httpOnly,
                   'path': cookie.path,
@@ -808,7 +746,7 @@ class CartTask {
 
     this.getCookies((cookies) => {
       nightmare
-        .useragent(userAgent)
+        .useragent(settings.userAgent)
         .goto('about:blank')
         .then(() => {
           setTimeout(() => {
@@ -849,7 +787,7 @@ class CartTask {
 
     this.getCookies((cookies) => {
       nightmare
-        .useragent(userAgent)
+        .useragent(settings.userAgent)
         .goto('about:blank')
         .then(() => {
           setTimeout(() => {

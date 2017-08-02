@@ -55,13 +55,17 @@ const divUK = $('#divUK');
 /* Global Settings Elements */
 const apiKeys = $('#apiKeys');
 const gCookies = $('#gCookies');
+const userAgent = $('#userAgent');
+const hmacName = $('#hmacName');
 const saveSettings = $('#saveSettings');
 
 /* Region Specific Settings Elements */
 const sitekeyUS = $('#sitekeyUS');
-const formJsonUS = $('#formJsonUS');
+const clientIdUS = $('#clientIdUS');
+const capdupUS = $('#capdupUS');
 const sitekeyUK = $('#sitekeyUK');
-const formJsonUK = $('#formJsonUK');
+const clientIdUK = $('#clientIdUK');
+const capdupUK = $('#capdupUK');
 
 /* Tasks Indexs */
 let bruteforceIndex = 0;
@@ -391,10 +395,14 @@ saveSettings.click(function(event) {
   ipcRenderer.send('saveSettings', {
     apiKeys: apiKeys.val().split('\n').clean(''),
     gCookies: JSON.parseNoErr(gCookies.val()),
+    userAgent: userAgent.val(),
+    hmacName: hmacName.val(),
     sitekeyUS: sitekeyUS.val(),
     sitekeyUK: sitekeyUK.val(),
-    formJsonUS: formJsonUS.val(),
-    formJsonUK: formJsonUK.val()
+    clientIdUS: clientIdUS.val(),
+    clientIdUK: clientIdUK.val(),
+    capdupUS: capdupUS.val(),
+    capdupUK: capdupUK.val()
   });
 })
 
@@ -415,10 +423,14 @@ ipcRenderer.on('setupUi', function(event, data) {
   }
   apiKeys.val(apiKeysStr);
   gCookies.val(JSON.stringify(data.gCookies));
+  hmacName.val(data.hmacName);
+  userAgent.val(data.userAgent);
   sitekeyUS.val(data.sitekeyUS);
   sitekeyUK.val(data.sitekeyUK);
-  formJsonUS.val(data.formJsonUS);
-  formJsonUK.val(data.formJsonUK);
+  clientIdUS.val(data.clientIdUS);
+  clientIdUK.val(data.clientIdUK);
+  capdupUS.val(data.capdupUS);
+  capdupUK.val(data.capdupUK);
 })
 
 ipcRenderer.send('setupUi', {});
