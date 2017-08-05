@@ -1,0 +1,7 @@
+.scroll-table {
+	display: block;
+	height: calc(100vh - 154px);
+	overflow-y: scroll;
+	border-bottom: 2px solid $table-color;
+	border-left: 2px solid $table-color;
+}

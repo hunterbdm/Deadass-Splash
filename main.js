@@ -42,10 +42,15 @@ let captchas = [];
 
 function init() {
   app.on('ready', function() {
-    mainWin = new BrowserWindow({width:1300, height:700, icon: __dirname + '/img/favicon.png', showDevTools: true});
+    mainWin = new BrowserWindow({width:1300, height:700, icon: __dirname + '/img/favicon.png', showDevTools: true, frame: false});
     //mainWin.webContents.openDevTools();
     mainWin.loadURL('file://' + __dirname +'/index.html');
     //mainWin.setMenu(null);
+
+    //win.on('closed', () => { win = null; }); // Not sure if this is needed
+    // mainWin.on("maximize", () => { win.webContents.send("maximize"); });
+    // mainWin.on("unmaximize", () => { win.webContents.send("unmaximize"); });
+    
     mainWin.addListener('closed', function() {
       app.exit();
       process.exit(1);

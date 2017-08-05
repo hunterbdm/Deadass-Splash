@@ -53,3 +53,6 @@ If video will not play try [this](http://youtubeonrepeat.com/watch/?v=ZQRasLomOB
 ![screen shot](http://i.imgur.com/9x8bsgI.png)
 ![screen shot](http://i.imgur.com/t88wHpd.png)
 ![screen shot](http://i.imgur.com/S8OmsPB.png)
+
+## Notes
+1. If you wish to make SASS changes gulp may need to be installed globaly(npm install -g gulp)

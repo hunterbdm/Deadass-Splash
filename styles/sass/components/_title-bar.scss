@@ -1,0 +1,50 @@
+#title-bar {
+	width: 100%;
+	height: 46px;
+	background: $dark-primary;
+	z-index: 100;
+	
+	#title, #title > h2 {
+		-webkit-user-select: none;
+		-webkit-app-region: drag;
+		color: #fff;
+		width: 100%;
+	}
+
+	#title h2 {
+		margin: 3px 0 0 5px;
+		
+		i.material-icons {
+			font-size: 25px;
+		}
+	}
+
+	.title-bar-btns {
+		border: none;
+		color: #fff;
+		background: transparent;
+		box-shadow: none;
+		padding: 0 2px;
+		cursor: pointer;
+
+		&:hover {
+			color: $gray-lighter;
+		}
+	}
+
+	i.material-icons {
+		font-size: 32px;
+	}
+
+	#close-btn {
+		padding-top: 7px;
+	}
+
+	#max-btn {
+		padding-top: 8px;
+	}
+
+	#min-btn {
+		padding-top: 15px;
+	}
+}

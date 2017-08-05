@@ -8,6 +8,7 @@ const tabSelectSettings = $('#tabSelectSettings');
 const tabSelectPayment = $('#tabSelectPayment');
 var cTabSelect = tabSelectAddTasks;
 
+
 /* Tab Divs */
 const tabAddTasks = $('#tabAddTasks');
 const tabBruteforce = $('#tabBruteforce');
@@ -15,6 +16,7 @@ const tabCart = $('#tabCart');
 const tabSettings = $('#tabSettings');
 const tabPayment = $('#tabPayment');
 var cTab = tabAddTasks;
+const item = $('.content-container'); // All tabs
 
 /* New BruteForce Tasks Elements */
 const proxies = $('#proxies');
@@ -67,54 +69,78 @@ const sitekeyUK = $('#sitekeyUK');
 const clientIdUK = $('#clientIdUK');
 const capdupUK = $('#capdupUK');
 
+/* Theme Switch */
+$('#switch-theme').click(function() {
+  var el = document.getElementById("css-link");
+
+  if (el.href.match("./styles/css/app.css")) {
+    el.href = "./styles/css/dark-app.css";    
+  } else {
+    el.href = "./styles/css/app.css";  
+  }
+});
+
 /* Tasks Indexs */
 let bruteforceIndex = 0;
 let cartIndex = 0;
 
-tabSelectAddTasks.click(function(event) {
-  cTab.attr('hidden', '');
-  cTabSelect.attr('class', 'div-tabSelect')
-  tabAddTasks.removeAttr('hidden');
-  tabSelectAddTasks.attr('class', 'div-tabSelect div-tabSelect-current');
-  cTab = tabAddTasks;
-  cTabSelect = tabSelectAddTasks;
-})
+$('.tab-link').click(function() {
+  let tab = $(this).attr("tab"); 
 
-tabSelectBruteforce.click(function(event) {
-  cTab.attr('hidden', '');
-  cTabSelect.attr('class', 'div-tabSelect')
-  tabBruteforce.removeAttr('hidden');
-  tabSelectBruteforce.attr('class', 'div-tabSelect div-tabSelect-current');
-  cTab = tabBruteforce;
-  cTabSelect = tabSelectBruteforce;
-})
+  item.each(function(){
+    if ($(this).hasClass(tab)) {
+      $(this).fadeIn(100)
+    } else {
+      $(this).fadeOut(0)
+    }
+  })
 
-tabSelectCart.click(function(event) {
-  cTab.attr('hidden', '');
-  cTabSelect.attr('class', 'div-tabSelect')
-  tabCart.removeAttr('hidden');
-  tabSelectCart.attr('class', 'div-tabSelect div-tabSelect-current');
-  cTab = tabCart;
-  cTabSelect = tabSelectCart;
-})
+});
 
-tabSelectSettings.click(function(event) {
-  cTab.attr('hidden', '');
-  cTabSelect.attr('class', 'div-tabSelect')
-  tabSettings.removeAttr('hidden');
-  tabSelectSettings.attr('class', 'div-tabSelect div-tabSelect-current');
-  cTab = tabSettings;
-  cTabSelect = tabSelectSettings;
-})
+// tabSelectAddTasks.click(function(event) {
+//   cTab.attr('hidden', '');
+//   cTabSelect.attr('class', 'div-tabSelect')
+//   tabAddTasks.removeAttr('hidden');
+//   tabSelectAddTasks.attr('class', 'div-tabSelect div-tabSelect-current');
+//   cTab = tabAddTasks;
+//   cTabSelect = tabSelectAddTasks;
+// })
 
-tabSelectPayment.click(function(event) {
-  cTab.attr('hidden', '');
-  cTabSelect.attr('class', 'div-tabSelect')
-  tabPayment.removeAttr('hidden');
-  tabSelectPayment.attr('class', 'div-tabSelect div-tabSelect-current');
-  cTab = tabPayment;
-  cTabSelect = tabSelectPayment;
-})
+// tabSelectBruteforce.click(function(event) {
+//   cTab.attr('hidden', '');
+//   cTabSelect.attr('class', 'div-tabSelect')
+//   tabBruteforce.removeAttr('hidden');
+//   tabSelectBruteforce.attr('class', 'div-tabSelect div-tabSelect-current');
+//   cTab = tabBruteforce;
+//   cTabSelect = tabSelectBruteforce;
+// })
+
+// tabSelectCart.click(function(event) {
+//   cTab.attr('hidden', '');
+//   cTabSelect.attr('class', 'div-tabSelect')
+//   tabCart.removeAttr('hidden');
+//   tabSelectCart.attr('class', 'div-tabSelect div-tabSelect-current');
+//   cTab = tabCart;
+//   cTabSelect = tabSelectCart;
+// })
+
+// tabSelectSettings.click(function(event) {
+//   cTab.attr('hidden', '');
+//   cTabSelect.attr('class', 'div-tabSelect')
+//   tabSettings.removeAttr('hidden');
+//   tabSelectSettings.attr('class', 'div-tabSelect div-tabSelect-current');
+//   cTab = tabSettings;
+//   cTabSelect = tabSelectSettings;
+// })
+
+// tabSelectPayment.click(function(event) {
+//   cTab.attr('hidden', '');
+//   cTabSelect.attr('class', 'div-tabSelect')
+//   tabPayment.removeAttr('hidden');
+//   tabSelectPayment.attr('class', 'div-tabSelect div-tabSelect-current');
+//   cTab = tabPayment;
+//   cTabSelect = tabSelectPayment;
+// })
 
 dropDownRegion.change(function(event) {
   let newVal = dropDownRegion.find(":selected").attr('value');
