@@ -199,11 +199,11 @@ addBruteforce.click(function(event) {
         proxy.attr('class', 'js-proxy');
         proxy.text(proxyList[p]);
         let actions = $(document.createElement('td'));
-        actions.attr('class', 'js-actions');
+        actions.attr('class', 'js-actions btn-group');
 
         let copyCookies = $(document.createElement('button'));
         copyCookies.attr("type", "button");
-        copyCookies.attr("class", "left action js-copyCookies");
+        copyCookies.attr("class", "left action js-copyCookies btn btn-default btn-sm");
         copyCookies.attr('disabled', '');
         copyCookies.text('Copy Cookies');
         copyCookies.click(function() {
@@ -212,7 +212,7 @@ addBruteforce.click(function(event) {
 
         let copyHtml = $(document.createElement('button'));
         copyHtml.attr("type", "button");
-        copyHtml.attr("class", "mid action js-copyHtml");
+        copyHtml.attr("class", "mid action js-copyHtml btn btn-default btn-sm");
         copyHtml.attr('disabled', '');
         copyHtml.text('Copy HTML');
         copyHtml.click(function() {
@@ -221,7 +221,7 @@ addBruteforce.click(function(event) {
 
         let showHide = $(document.createElement('button'));
         showHide.attr("type", "button");
-        showHide.attr("class", "mid action js-showHide");
+        showHide.attr("class", "mid action js-showHide btn btn-default btn-sm");
         showHide.attr('disabled', '');
         showHide.text('Show/Hide');
         showHide.click(function() {
@@ -230,7 +230,7 @@ addBruteforce.click(function(event) {
 
         let fillAtc = $(document.createElement('button'));
         fillAtc.attr("type", "button");
-        fillAtc.attr("class", "right action js-fillAtc");
+        fillAtc.attr("class", "right action js-fillAtc btn btn-default btn-sm");
         fillAtc.attr('disabled', '');
         fillAtc.text('Fill ATC');
         fillAtc.click(function() {
@@ -317,11 +317,11 @@ addCart.click(function(event) {
       proxy.attr('class', 'js-proxy');
       proxy.text(proxyCart.val());
       let actions = $(document.createElement('td'));
-      actions.attr('class', 'js-actions');
+      actions.attr('class', 'js-actions btn-group');
 
       let copyCookies = $(document.createElement('button'));
       copyCookies.attr("type", "button");
-      copyCookies.attr("class", "left action js-copyCookies");
+      copyCookies.attr("class", "left action js-copyCookies btn btn-default btn-sm");
       copyCookies.attr('disabled', '');
       copyCookies.text('Copy Cookies');
       copyCookies.click(function() {
@@ -330,7 +330,7 @@ addCart.click(function(event) {
 
       let openBrowser = $(document.createElement('button'));
       openBrowser.attr("type", "button");
-      openBrowser.attr("class", "mid action js-openBrowser");
+      openBrowser.attr("class", "mid action js-openBrowser btn btn-default btn-sm");
       openBrowser.attr('disabled', '');
       openBrowser.text('Open Browser');
       openBrowser.click(function() {

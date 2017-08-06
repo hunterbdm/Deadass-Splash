@@ -221,10 +221,32 @@ a {
   background-color: $brand-primary;
 }
 
+.table-bordered th,
+.table-bordered td {
+  border-left: none !important;
+}
+
+.table-bordered {
+  border-left: none !important;
+}
+
+.table-hover > tbody > tr, .table-hover > tbody > tr > th,
+.table-hover > tbody > tr > td {
+  border-top: 1px solid $gray-lighter;  
+}
+
+.table th, .table td {
+  border-top: none !important;
+}
+
 // Forms =======================================================================
 
 label {
   font-weight: normal;
+}
+
+input[type=number] {
+  line-height: 2.5 !important;
 }
 
 textarea,
@@ -242,10 +264,10 @@ input[type=number],
   padding: 0;
   border: none;
   border-radius: 0;
-  appearance: none;
+  -webkit-appearance: none;
   box-shadow: inset 0 -1px 0 #ddd;
   font-size: 16px;
-  line-height: 2.5;
+  line-height: 1.4;
   transition: all 0.2s;
 
   &:focus {
@@ -331,7 +353,7 @@ input[type="radio"],
   vertical-align: top;
   border: none;
   background-color: transparent;
-  appearance: none;
+  -webkit-appearance: none;
   cursor: pointer;
 
   &:focus {
@@ -386,7 +408,7 @@ input[type="checkbox"],
   position: relative;
   border: none;
   margin-bottom: -4px;
-  appearance: none;
+  -webkit-appearance: none;
   cursor: pointer;
 
   &:focus {

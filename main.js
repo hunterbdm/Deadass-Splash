@@ -312,7 +312,7 @@ class BruteforceTask {
           this.getHtml((pageSource) => {
             if (pageSource.includes('data-sitekey')) {
               this.setStatus('Through Queue');
-              this.setColor('green');
+              this.setColor('rgba(74, 202, 21, 0.41)'); // green
               this.enableButton('fillAtc');
             }
             else
@@ -324,7 +324,7 @@ class BruteforceTask {
       .catch((err) => {
         this.setStatus('Error: ' + err.toString());
         console.log(err);
-        this.setColor('red');
+        this.setColor('rgba(239, 33, 33, 0.37)'); // red
         if(!doneLoading) {
           setTimeout(() => {loadingTasks--;}, 3000);
           doneLoading = true;

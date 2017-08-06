@@ -13,15 +13,13 @@
     <body>
       <div class="d-inline-flex" id="title-bar">
         <div class="mr-auto" id="title">
-          <h2>
-            <i class="material-icons">battery_charging_full</i>Deadass Splash
-          </h2>
+          <h5>Deadass Splash</h5>
         </div>
           <a class="btn title-bar-btns" id="min-btn">
             <i class="material-icons">remove</i>
           </a>
           <a class="btn title-bar-btns" id="max-btn">
-            <i class="material-icons">add</i>
+           <i class="material-icons">crop_square</i>
           </a>
           <a class="btn title-bar-btns" id="close-btn">
             <i class="material-icons">clear</i>
@@ -32,19 +30,22 @@
           <div class="col side-nav">
             <div class="list-group flex-column">
                 <a href="#" class="tab-link list-group-item list-group-item-action" tab="addBruteForce">
-                   <i class="fa fa-plus-square-o" aria-hidden="true"></i>&nbsp;New Brute Force
+                   <!-- <i class="fa fa-plus-square-o" aria-hidden="true"></i> -->
+                    <i class="material-icons">add_box</i>&nbsp;New Brute Force
                 </a>
                 <a href="#" class="tab-link list-group-item list-group-item-action" tab="addTask">
-                   <i class="fa fa-plus-square-o" aria-hidden="true"></i>&nbsp;New Cart Tasks
+                   <!-- <i class="fa fa-plus-square-o" aria-hidden="true"></i> -->
+                   <i class="material-icons">add_circle</i>&nbsp;New Cart Tasks
                 </a>
                 <a href="#" class="tab-link list-group-item list-group-item-action" tab="bruteForce">
-                   <i class="fa fa-dot-circle-o" aria-hidden="true"></i>&nbsp;Brute Force Tasks
+                   <i class="material-icons">lock_open</i>&nbsp;Brute Force Tasks
                 </a>
                 <a href="#" class="tab-link list-group-item list-group-item-action" tab="cart">
-                   <i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;Cart Tasks
+                   <!-- <i class="fa fa-shopping-cart" aria-hidden="true"></i> -->
+                   <i class="material-icons">shopping_cart</i>&nbsp;Cart Tasks
                 </a>
                 <a href="#" class="tab-link list-group-item list-group-item-action" tab="settings">
-                   <i class="fa fa-cog" aria-hidden="true"></i>&nbsp;Settings
+                   <i class="material-icons">settings</i>&nbsp;Settings
                 </a>
             </div>
 
@@ -79,7 +80,7 @@
                     <fieldset>
                       <div class="form-group">
                         <label for="proxies">Proxies</label>
-                        <textarea id="proxies" class="form-control" rows="3"></textarea>
+                        <textarea id="proxies" class="form-control" rows="6"></textarea>
                       </div>
                       <div class="row">
                         <div class="col-6">
@@ -103,7 +104,7 @@
                           </div>
                         </div>
                         <div class="col">
-                          <button class="btn btn-success form-button" type="button" id="addBruteforce">Add</button>
+                          <button class="btn btn-primary form-button" type="button" id="addBruteforce">Add</button>
                         </div>
                       </div>
                     </fieldset>
@@ -145,7 +146,7 @@
                         <div class="col-8">
                           <div class="form-group">
                             <label for="cookies">Cookies</label>
-                            <textarea class="form-control" id="cookies" rows="3"></textarea>
+                            <textarea class="form-control" id="cookies" rows="6"></textarea>
                           </div>
                         </div>
                         <div class="col-4">
@@ -193,7 +194,7 @@
                         </div>
                         <div class="col">
                           <div class="form-group">
-                            <button type="button" class="form-button btn btn-success" id="addCart">Add</button>
+                            <button type="button" class="form-button btn btn-primary" id="addCart">Add</button>
                           </div>
                         </div>
                       </div>
@@ -213,13 +214,13 @@
               <div class="row">
                 <div class="col-12">
                   <div class="scroll-table">
-                    <table class="table table-striped table-hover table-bordered">
+                    <table class="table table-striped table-hover">
                       <thead>
                         <tr>
-                          <th><a href="">ID</a></th>
-                          <th><a href="">Status</a></th>
-                          <th><a href="">Proxy</a></th>
-                          <th><a href="">Action</a></th>
+                          <th>ID</th>
+                          <th>Status</th>
+                          <th>Proxy</th>
+                          <th>Action</th>
                         </tr>
                       </thead>
                       <tbody id="bruteforceTasks">
@@ -241,15 +242,15 @@
               <div class="row">
                 <div class="col-12">
                   <div class="scroll-table">
-                      <table class="table table-striped table-hover table-bordered">
+                      <table class="table table-striped table-hover">
                           <thead>
                               <tr>
-                                  <th><a href="#">ID</a></th>
-                                  <th><a href="#">Region</a></th>
-                                  <th><a href="#">Size</a></th>
-                                  <th><a href="#">Status</a></th>
-                                  <th><a href="#">Proxy</a></th>
-                                  <th><a href="#">Action</a></th>
+                                  <th>ID</th>
+                                  <th>Region</th>
+                                  <th>Size</th>
+                                  <th>Status</th>
+                                  <th>Proxy</th>
+                                  <th>Action</th>
                               </tr>
                           </thead>
                         <tbody id="cartTasks">
@@ -304,6 +305,9 @@
                 <li class="nav-item">
                   <a class="nav-link" data-toggle="tab" href="#regionSettings" aria-expanded="false">Region Settings</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#appSettings" aria-expanded="false">App Settings</a>
+                </li>
               </ul>
               <div id="myTabContent" class="tab-content">
                 <div class="tab-pane active" id="globalSettings" aria-expanded="true">
@@ -330,8 +334,6 @@
                       </button>
                     </div>
                   </div>
-
-                  <button id="switch-theme" class="btn btn-primary">Switch Theme</button>
                 </div>
                 <div class="tab-pane fade" id="regionSettings" aria-expanded="false">
                   <div class="row">
@@ -378,6 +380,24 @@
                       </div>
                     </div>
                   </div>
+                </div>
+                <div class="tab-pane fade" id="appSettings" aria-expanded="false">
+                  <fieldset class="form-group">
+                    <legend>Theme Options:</legend>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="theme" id="light-theme" value="option1" checked="">
+                        Light Theme
+                      </label>
+                    </div>
+                    <div class="form-check radio">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="theme" id="dark-theme" value="option2">
+                        Dark Theme
+                      </label>
+                    </div>
+                  </fieldset>
+                  <button id="switch-theme" class="btn btn-primary">Switch Theme</button>
                 </div>
               </div>
             </div>

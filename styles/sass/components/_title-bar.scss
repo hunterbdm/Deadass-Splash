@@ -1,21 +1,22 @@
 #title-bar {
 	width: 100%;
-	height: 46px;
+	height: 30px;
 	background: $dark-primary;
 	z-index: 100;
 	
-	#title, #title > h2 {
+	#title, #title > h5 {
 		-webkit-user-select: none;
 		-webkit-app-region: drag;
 		color: #fff;
 		width: 100%;
 	}
 
-	#title h2 {
+	#title h5 {
 		margin: 3px 0 0 5px;
+		font-weight: 200;
 		
 		i.material-icons {
-			font-size: 25px;
+			font-size: 18px;
 		}
 	}
 
@@ -33,18 +34,29 @@
 	}
 
 	i.material-icons {
-		font-size: 32px;
-	}
-
-	#close-btn {
-		padding-top: 7px;
-	}
-
-	#max-btn {
-		padding-top: 8px;
+		font-size: 25px;
 	}
 
 	#min-btn {
-		padding-top: 15px;
+		padding-top: 10px;
+		&:hover {
+			color: $yellow;
+		}
 	}
+
+	#max-btn {
+		padding-top: 3px;
+		&:hover {
+			color: $green;
+		}
+	}
+
+	#close-btn {
+		padding-top: 3px;
+		&:hover {
+			color: $red;
+		}
+	}
+
+	
 }
