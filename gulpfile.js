@@ -30,4 +30,4 @@ gulp.task('serve', function () {
 
 });
 
-gulp.task('default', series('serve', 'watch'));
+gulp.task('default', ['serve', 'watch']);

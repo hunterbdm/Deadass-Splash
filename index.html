@@ -1,158 +1,139 @@
 <!DOCTYPE HTML>
 <html lang="en">
-    <head>
-      <meta charset="UTF-8"/>
-      <title>Deadass Splash</title>
-      <meta name="description" content="Description Here"/>
-      <meta name="keywords" content="adidas,splash,bot,fuck,why,cant,I,cop,dude"/>
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-      <link rel="stylesheet" href="./styles/css/app.css" id="css-link">
-      <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    </head>
-    <body>
-      <div class="d-inline-flex" id="title-bar">
-        <div class="mr-auto" id="title">
-          <h5>Deadass Splash</h5>
-        </div>
-          <a class="btn title-bar-btns" id="min-btn">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Deadass Splash</title>
+  <meta name="description" content="Description Here" />
+  <meta name="keywords" content="adidas,splash,bot,fuck,why,cant,I,cop,dude" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/css/app.css" id="css-link">
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="d-inline-flex" id="title-bar">
+    <div class="mr-auto" id="title">
+      <h5>Deadass Splash</h5>
+    </div>
+    <a class="btn title-bar-btns" id="min-btn">
             <i class="material-icons">remove</i>
           </a>
-          <a class="btn title-bar-btns" id="max-btn">
+    <a class="btn title-bar-btns" id="max-btn">
            <i class="material-icons">crop_square</i>
           </a>
-          <a class="btn title-bar-btns" id="close-btn">
+    <a class="btn title-bar-btns" id="close-btn">
             <i class="material-icons">clear</i>
           </a>
-      </div>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col side-nav">
-            <div class="list-group flex-column">
-                <a href="#" class="tab-link list-group-item list-group-item-action" tab="addBruteForce">
-                   <!-- <i class="fa fa-plus-square-o" aria-hidden="true"></i> -->
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col side-nav">
+        <div class="list-group flex-column">
+          <a href="#" class="tab-link list-group-item list-group-item-action" tab="addBruteForce">
                     <i class="material-icons">add_box</i>&nbsp;New Brute Force
                 </a>
-                <a href="#" class="tab-link list-group-item list-group-item-action" tab="addTask">
-                   <!-- <i class="fa fa-plus-square-o" aria-hidden="true"></i> -->
+          <a href="#" class="tab-link list-group-item list-group-item-action" tab="addTask">
                    <i class="material-icons">add_circle</i>&nbsp;New Cart Tasks
                 </a>
-                <a href="#" class="tab-link list-group-item list-group-item-action" tab="bruteForce">
+          <a href="#" class="tab-link list-group-item list-group-item-action" tab="bruteForce">
                    <i class="material-icons">lock_open</i>&nbsp;Brute Force Tasks
                 </a>
-                <a href="#" class="tab-link list-group-item list-group-item-action" tab="cart">
-                   <!-- <i class="fa fa-shopping-cart" aria-hidden="true"></i> -->
+          <a href="#" class="tab-link list-group-item list-group-item-action" tab="cart">
                    <i class="material-icons">shopping_cart</i>&nbsp;Cart Tasks
                 </a>
-                <a href="#" class="tab-link list-group-item list-group-item-action" tab="settings">
+          <a href="#" class="tab-link list-group-item list-group-item-action" tab="settings">
                    <i class="material-icons">settings</i>&nbsp;Settings
                 </a>
+        </div>
+      </div>
+      <div class="col">
+        <!-- NEW Brute Force Tab -->
+        <div class="content-container addBruteForce">
+          <div class="row">
+            <div class="p-2 col">
+              <h2>New Brute Force Tasks</h2>
             </div>
-
-            <!-- <div class="nav-tab div-tabSelect-current" id="tabSelectAddTasks">
-              <img class="tab-img" src="img\add.png"></img>
-              <span>New Tasks</span>
-            </div>
-            <div class="div-tabSelect" id="tabSelectBruteforce">
-              <img class="tab-img" src="img\target.png"></img>
-              <span>Bruteforce Tasks</span>
-            </div>
-            <div class="div-tabSelect" id="tabSelectCart">
-              <img class="tab-img" src="img\cart.png"></img>
-              <span>Cart Tasks</span>
-            </div>
-            <div class="div-tabSelect" id="tabSelectSettings">
-              <img class="tab-img" src="img\settings.png"></img>
-              <span>Settings</span>
-            </div> -->
           </div>
-          <div class="col">
-            <!-- NEW Brute Force Tab -->
-            <div class="content-container addBruteForce">
-              <div class="row">
-                <div class="p-2 col">
-                  <h2>New Brute Force Tasks</h2>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12">
-                  <form>
-                    <fieldset>
+          <div class="row">
+            <div class="col-12">
+              <form>
+                <fieldset>
+                  <div class="form-group">
+                    <label for="proxies">Proxies</label>
+                    <textarea id="proxies" class="form-control" rows="6"></textarea>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
                       <div class="form-group">
-                        <label for="proxies">Proxies</label>
-                        <textarea id="proxies" class="form-control" rows="6"></textarea>
+                        <label for="splashUrlBruteforce">Splash URL</label>
+                        <input class="form-control" type="text" id="splashUrlBruteforce">
                       </div>
-                      <div class="row">
-                        <div class="col-6">
-                          <div class="form-group">
-                            <label for="splashUrlBruteforce">Splash URL</label>
-                            <input class="form-control" type="text" id="splashUrlBruteforce">
-                          </div>
-                        </div>
-                        <div class="col-6">
-                          <div class="form-group">
-                            <label for="skuBruteforce">SKU</label>
-                            <input class="form-control" type="text" id="skuBruteforce">
-                          </div>
-                        </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-group">
+                        <label for="skuBruteforce">SKU</label>
+                        <input class="form-control" type="text" id="skuBruteforce">
                       </div>
-                      <div class="row">
-                        <div class="col-3">
-                          <div class="form-group">
-                            <label for="tpp">Tasks / Proxies</label>
-                            <input class="form-control" type="number" value="1" min="1" id="tpp">
-                          </div>
-                        </div>
-                        <div class="col">
-                          <button class="btn btn-primary form-button" type="button" id="addBruteforce">Add</button>
-                        </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-3">
+                      <div class="form-group">
+                        <label for="tpp">Tasks / Proxies</label>
+                        <input class="form-control" type="number" value="1" min="1" id="tpp">
                       </div>
-                    </fieldset>
-                  </form>
-                </div>
-              </div>
+                    </div>
+                    <div class="col">
+                      <button class="btn btn-primary form-button" type="button" id="addBruteforce">Add</button>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
             </div>
+          </div>
+        </div>
 
-            <!-- NEWTasks Tab -->
-            <div class="content-container secondary-container addTask">
-              <div class="row">
-                <div class="p-2 col">
-                  <h2>New Cart Tasks</h2>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12">
-                  <form>
-                    <fieldset>
+        <!-- NEWTasks Tab -->
+        <div class="content-container secondary-container addTask">
+          <div class="row">
+            <div class="p-2 col">
+              <h2>New Cart Tasks</h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <form>
+                <fieldset>
+                  <div class="form-group">
+                    <label for="proxyCart">Proxy</label>
+                    <input type="text" class="form-control" id="proxyCart">
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
                       <div class="form-group">
-                        <label for="proxyCart">Proxy</label>
-                        <input type="text" class="form-control" id="proxyCart">
+                        <label for="splashUrlCart">Splash URL</label>
+                        <input class="form-control" type="text" id="splashUrlCart">
                       </div>
-                      <div class="row">
-                        <div class="col-6">
-                          <div class="form-group">
-                            <label for="splashUrlCart">Splash URL</label>
-                            <input class="form-control" type="text" id="splashUrlCart">
-                          </div>
-                        </div>
-                        <div class="col-6">
-                          <div class="form-group">
-                            <label for="skuCart">SKU</label>
-                            <input class="form-control" type="text" id="skuCart">
-                          </div>
-                        </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-group">
+                        <label for="skuCart">SKU</label>
+                        <input class="form-control" type="text" id="skuCart">
                       </div>
-                      <div class="row">
-                        <div class="col-8">
-                          <div class="form-group">
-                            <label for="cookies">Cookies</label>
-                            <textarea class="form-control" id="cookies" rows="6"></textarea>
-                          </div>
-                        </div>
-                        <div class="col-4">
-                          <div class="form-group">
-                            <label for="sizes">Sizes</label>
-                            <select multiple="" class="form-control sizes-select" id="sizes">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-8">
+                      <div class="form-group">
+                        <label for="cookies">Cookies</label>
+                        <textarea class="form-control" id="cookies" rows="6"></textarea>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="form-group">
+                        <label for="sizes">Sizes</label>
+                        <select multiple="" class="form-control sizes-select" id="sizes">
                               <option>5</option>
                               <option>5.5</option>
                               <option>6</option>
@@ -173,381 +154,234 @@
                               <option>14</option>
                               <option>15</option>
                             </select>
-                          </div>
-                        </div>
                       </div>
-                      <div class="row">
-                        <div class="col-3">
-                          <div class="form-group">
-                            <label for="tasks">Tasks</label>
-                            <input type="number" class="form-control" id="tasks" value="1" min="1">
-                          </div>
-                        </div>
-                        <div class="col-3">
-                          <div class="form-group">
-                            <label for="regionCart">&nbsp;</label>
-                            <select class="form-control" id="regionCart">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-3">
+                      <div class="form-group">
+                        <label for="tasks">Tasks</label>
+                        <input type="number" class="form-control" id="tasks" value="1" min="1">
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="form-group">
+                        <label for="regionCart">&nbsp;</label>
+                        <select class="form-control" id="regionCart">
                               <option value="US">US </option>
                               <option value="UK">UK </option>
                             </select>
-                          </div>
-                        </div>
-                        <div class="col">
-                          <div class="form-group">
-                            <button type="button" class="form-button btn btn-primary" id="addCart">Add</button>
-                          </div>
-                        </div>
                       </div>
-                    </fieldset>
-                  </form>
-                </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group">
+                        <button type="button" class="form-button btn btn-primary" id="addCart">Add</button>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Brute Force Tasks Tab -->
+        <div class="content-container secondary-container bruteForce">
+          <div class="row">
+            <div class="p-2 col">
+              <h2>Brute Force Tasks</h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="scroll-table">
+                <table class="table table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Status</th>
+                      <th>Proxy</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="bruteforceTasks">
+
+                  </tbody>
+                </table>
               </div>
             </div>
-
-            <!-- Brute Force Tasks Tab -->
-            <div class="content-container secondary-container bruteForce">
-              <div class="row">
-                <div class="p-2 col">
-                  <h2>Brute Force Tasks</h2>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12">
-                  <div class="scroll-table">
-                    <table class="table table-striped table-hover">
-                      <thead>
-                        <tr>
-                          <th>ID</th>
-                          <th>Status</th>
-                          <th>Proxy</th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>
-                      <tbody id="bruteforceTasks">
-                        
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-              <button type="button" class="btn btn-danger mt-1" id="removeAllBruteTasks">Remove All</button>
+          </div>
+          <button type="button" class="btn btn-danger mt-1" id="removeAllBruteTasks">Remove All</button>
+        </div>
+        <!-- Cart Tasks -->
+        <div class="content-container secondary-container cart">
+          <div class="row">
+            <div class="p-2 col">
+              <h2>Cart Tasks</h2>
             </div>
-            <!-- Cart Tasks -->
-            <div class="content-container secondary-container cart">
-              <div class="row">
-                <div class="p-2 col">
-                  <h2>Cart Tasks</h2>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12">
-                  <div class="scroll-table">
-                      <table class="table table-striped table-hover">
-                          <thead>
-                              <tr>
-                                  <th>ID</th>
-                                  <th>Region</th>
-                                  <th>Size</th>
-                                  <th>Status</th>
-                                  <th>Proxy</th>
-                                  <th>Action</th>
-                              </tr>
-                          </thead>
-                        <tbody id="cartTasks">
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="scroll-table">
+                <table class="table table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Region</th>
+                      <th>Size</th>
+                      <th>Status</th>
+                      <th>Proxy</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="cartTasks">
 
-                        </tbody>
-                      </table>
-                  </div>
-                </div>
+                  </tbody>
+                </table>
               </div>
-              <div class="row bottom-bar">
-                <div class="col">
-                  <button class="btn btn-danger mt-1" type="button" id="removeAllCartTasks">Remove All</button>
-                </div>
-                <div class="col">
-                  <div class="form-group">
-                    <select class="form-control" id="regionHarvester">
+            </div>
+          </div>
+          <div class="row bottom-bar">
+            <div class="col">
+              <button class="btn btn-danger mt-1" type="button" id="removeAllCartTasks">Remove All</button>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <select class="form-control" id="regionHarvester">
                       <option>US </option>
                       <option>UK </option>
                     </select>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="form-group">
-                    <input type="number" id="threads" class="form-control" value="3" min="1">
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="form-group">
-                    <button type="button" id="startHarvester" class="btn btn-success mt-1">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <input type="number" id="threads" class="form-control" value="3" min="1">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <button type="button" id="startHarvester" class="btn btn-success mt-1">
                       <i class="fa fa-play fa-fw" aria-hidden="true"></i>
                     </button>
-                    <button type="button" id="stopHarvester" class="btn btn-danger mt-1" disabled>
+                <button type="button" id="stopHarvester" class="btn btn-danger mt-1" disabled>
                       <i class="fa fa-stop fa-fw" aria-hidden="true"></i>
                     </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Settings -->
+        <div class="content-container secondary-container settings">
+
+          <ul class="nav nav-tabs mt-1">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#globalSettings" aria-expanded="true">Global Settings</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#regionSettings" aria-expanded="false">Region Settings</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#appSettings" aria-expanded="false">App Settings</a>
+            </li>
+          </ul>
+          <div id="myTabContent" class="tab-content">
+            <div class="tab-pane active" id="globalSettings" aria-expanded="true">
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="apiKeys">2Captcha API Keys</label>
+                    <textarea id="apiKeys" class="form-control"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="gCookies">Google Cookies (NOT REQUIRED)</label>
+                    <textarea id="gCookies" class="form-control"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="hmacName">HMAC Cookie Name</label>
+                    <input type="text" id="hmacName" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="userAgent">User Agent (Don't change if you don't know what you're doing)</label>
+                    <input type="text" id="userAgent" class="form-control">
                   </div>
                 </div>
               </div>
-              <!-- <button class="left" type="button" id="removeAllCartTasks">Remove All</button> -->
-              
-              <!-- <input type="number" id="threads" class="mid" value="3" min="1"> -->
-              <!-- <button type="button" id="startHarvester" class="mid">Start</button>
-              <button type="button" id="stopHarvester" class="right" disabled>Stop</button> -->
             </div>
-
-            <!-- Settings -->
-            <div class="content-container secondary-container settings">
-
-              <ul class="nav nav-tabs mt-1">
-                <li class="nav-item">
-                  <a class="nav-link active" data-toggle="tab" href="#globalSettings" aria-expanded="true">Global Settings</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#regionSettings" aria-expanded="false">Region Settings</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#appSettings" aria-expanded="false">App Settings</a>
-                </li>
-              </ul>
-              <div id="myTabContent" class="tab-content">
-                <div class="tab-pane active" id="globalSettings" aria-expanded="true">
+            <div class="tab-pane fade" id="regionSettings" aria-expanded="false">
+              <div class="row">
+                <div class="col-12">
                   <div class="row">
-                    <div class="col-12">
+                    <div class="col-2">
                       <div class="form-group">
-                        <label for="apiKeys">2Captcha API Keys</label>
-                        <textarea id="apiKeys" class="form-control"></textarea>
-                      </div>
-                      <div class="form-group">
-                        <label for="gCookies">Google Cookies (NOT REQUIRED)</label>
-                        <textarea id="gCookies" class="form-control"></textarea>
-                      </div>
-                      <div class="form-group">
-                        <label for="hmacName">HMAC Cookie Name</label>
-                        <input type="text" id="hmacName" class="form-control">
-                      </div>
-                      <div class="form-group">
-                        <label for="userAgent">User Agent (Don't change if you don't know what you're doing)</label>
-                        <input type="text" id="userAgent" class="form-control">
-                      </div>
-                      <button type="button" name="button" class="btn btn-success mt-1" id="saveSettings">
-                        <i class="fa fa-floppy-o fa-lg fa-fw" aria-hidden="true"></i>&nbsp;save
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div class="tab-pane fade" id="regionSettings" aria-expanded="false">
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="row">
-                        <div class="col-2">
-                          <div class="form-group">
-                            <select class="form-control" id="dropdownRegion">
+                        <select class="form-control" id="dropdownRegion">
                               <option value="US">US </option>
                               <option value="UK">UK </option>
                             </select>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="div-region" id="divUS">
-                        <div class="form-group">
-                          <label for="siteKeyUS">Sitekey</label>
-                          <input type="text" id="sitekeyUS" class="form-control">
-                        </div>
-                        <div class="form-group">
-                          <label for="clientIdUS">Client ID</label>
-                          <input type="text" id="clientIdUS" class="form-control">
-                        </div>
-                        <div class="form-group">
-                          <label>Captcha Duplicate</label>
-                          <input type="text" id="capdupUS" class="form-control">
-                        </div>
-                      </div>
-
-                      <div class="div-region" id="divUK" hidden>
-                        <div class="form-group">
-                          <label>Sitekey</label>
-                          <input type="text" id="sitekeyUK" class="form-control">
-                        </div>
-                        <div class="form-group">
-                          <label>Client ID</label>
-                          <input type="text" id="clientIdUK" class="form-control">
-                        </div>
-                        <div class="form-group">
-                          <label>Captcha Duplicate</label>
-                          <input type="text" id="capdupUK" class="form-control">
-                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="tab-pane fade" id="appSettings" aria-expanded="false">
-                  <fieldset class="form-group">
-                    <legend>Theme Options:</legend>
-                    <div class="form-check">
-                      <label class="form-check-label">
-                      <input type="radio" class="form-check-input" name="theme" id="light-theme" value="option1" checked="">
-                        Light Theme
-                      </label>
+
+                  <div class="div-region" id="divUS">
+                    <div class="form-group">
+                      <label for="siteKeyUS">Sitekey</label>
+                      <input type="text" id="sitekeyUS" class="form-control">
                     </div>
-                    <div class="form-check radio">
-                    <label class="form-check-label">
-                      <input type="radio" class="form-check-input" name="theme" id="dark-theme" value="option2">
-                        Dark Theme
-                      </label>
+                    <div class="form-group">
+                      <label for="clientIdUS">Client ID</label>
+                      <input type="text" id="clientIdUS" class="form-control">
                     </div>
-                  </fieldset>
-                  <button id="switch-theme" class="btn btn-primary">Switch Theme</button>
+                    <div class="form-group">
+                      <label>Captcha Duplicate</label>
+                      <input type="text" id="capdupUS" class="form-control">
+                    </div>
+                  </div>
+
+                  <div class="div-region" id="divUK" hidden>
+                    <div class="form-group">
+                      <label>Sitekey</label>
+                      <input type="text" id="sitekeyUK" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Client ID</label>
+                      <input type="text" id="clientIdUK" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>Captcha Duplicate</label>
+                      <input type="text" id="capdupUK" class="form-control">
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
+            <div class="tab-pane fade" id="appSettings" aria-expanded="false">
+              <fieldset class="form-group">
+                <legend>Theme Options:</legend>
+                <div class="btn-group" id="themeSelector" data-toggle="buttons" theme="">
+                  <label class="btn btn-primary">
+                        <input type="radio" name="options" id="lightTheme" autocomplete="off"> Light
+                  </label>
+                  <label class="btn btn-primary">
+                      <input type="radio" name="options" id="darkTheme" autocomplete="off"> Dark
+                  </label>
+                </div>
+              </fieldset>
+            </div>
+            <button type="button" name="button" class="btn btn-success mt-1" id="saveSettings">
+              <i class="fa fa-floppy-o fa-lg fa-fw" aria-hidden="true"></i>&nbsp;save
+            </button>
           </div>
         </div>
-      <!-- <div class="div-tab" id="tabAddTasks">
-        <div class="half-width full-height left">
-          <h4>New BruteForce Tasks</h4>
-          <label>Proxies</label>
-          <textarea id="proxies" class="input input-proxies"></textarea>
-          <label class="input half-width left">Splash Url</label>
-          <label class="input half-width right">SKU</label>
-          <input type="text" id="splashUrlBruteforce" class="input half-width left">
-          <input type="text" id="skuBruteforce" class="input half-width right">
-          <label class="input full-width">Tasks / Proxy</label>
-          <input class="left" type="number" value="1" min="1" id="tpp">
-          <button class="right" type="button" id="addBruteforce">Add</button>
-        </div> -->
-        <!--
-        <div class="half-width full-height right">
-          <h4>New Cart Tasks</h4>
-          <label class="full-width">PROXY</label>
-          <input type="text" class="full-width" id="proxyCart">
-          <label class="input half-width left">Splash Url</label>
-          <label class="input half-width right">SKU</label>
-          <input type="text" id="splashUrlCart" class="input half-width left">
-          <input type="text" id="skuCart" class="input half-width right">
-          <label>Cookies</label>
-          <textarea id="cookies" class="input input-cookies left"></textarea>
-          <select multiple class="input input-sizes right" id="sizes">
-            <option>5</option>
-            <option>5.5</option>
-            <option>6</option>
-            <option>6.5</option>
-            <option>7</option>
-            <option>7.5</option>
-            <option selected="selected">8</option>
-            <option selected="selected">8.5</option>
-            <option selected="selected">9</option>
-            <option selected="selected">9.5</option>
-            <option selected="selected">10</option>
-            <option selected="selected">10.5</option>
-            <option selected="selected">11</option>
-            <option selected="selected">11.5</option>
-            <option selected="selected">12</option>
-            <option>12.5</option>
-            <option>13</option>
-            <option>14</option>
-            <option>15</option>
-          </select>
-          <label class="input full-width">Tasks</label>
-          <input class="left" type="number" value="1" min="1" id="tasks">
-          <select id="regionCart" class="mid">
-            <option value="US">US </option>
-            <option value="UK">UK </option>
-          </select>
-          <button class="right" type="button" id="addCart">Add</button>
-        </div>
       </div>
-      <div class="div-tab" id="tabBruteforce" hidden>
-        <h4>Bruteforce Tasks</h4>
-        <div class="scroll-table">
-            <table>
-                <thead>
-                    <tr>
-                        <th><a href="#">ID</a></th>
-                        <th><a href="#">Status</a></th>
-                        <th><a href="#">Proxy</a></th>
-                        <th><a href="#">Action</a></th>
-                    </tr>
-                </thead>
-              <tbody id="bruteforceTasks">
-
-              </tbody>
-            </table>
-        </div>
-        <button type="button" id="removeAllBruteTasks">Remove All</button>
-      </div>
-      <div class="div-tab" id="tabCart" hidden>
-        <h4>Cart Tasks</h4>
-        <div class="scroll-table">
-            <table>
-                <thead>
-                    <tr>
-                        <th><a href="#">ID</a></th>
-                        <th><a href="#">Region</a></th>
-                        <th><a href="#">Size</a></th>
-                        <th><a href="#">Status</a></th>
-                        <th><a href="#">Proxy</a></th>
-                        <th><a href="#">Action</a></th>
-                    </tr>
-                </thead>
-              <tbody id="cartTasks">
-
-              </tbody>
-            </table>
-        </div>
-        <button class="left" type="button" id="removeAllCartTasks">Remove All</button>
-        <select class="mid" id="regionHarvester">
-          <option>US </option>
-          <option>UK </option>
-        </select>
-        <input type="number" id="threads" class="mid" value="3" min="1">
-        <button type="button" id="startHarvester" class="mid">Start</button>
-        <button type="button" id="stopHarvester" class="right" disabled>Stop</button>
-      </div>
-      <div class="div-tab" id="tabSettings" hidden>
-        <div class="half-width full-height left">
-          <h4>Global Settings</h4>
-          <label>2Captcha API Keys</label>
-          <textarea id="apiKeys" class="input input-apikeys"></textarea>
-          <label>Google Cookies (NOT REQUIRED)</label>
-          <textarea id="gCookies" class="input input-gcookies"></textarea>
-          <label>HMAC Cookie Name</label>
-          <input type="text" id="hmacName" class="input input-hmacName full-width">
-          <label>User Agent (Don't change if you don't know what you're doing)</label>
-          <input type="text" id="userAgent" class="input input-useragent full-width">
-          <button type="button" name="button" id="saveSettings">Save</button>
-        </div>
-        <div class="half-width full-height right">
-          <h4>Region Settings</h4>
-          <select id="dropdownRegion">
-            <option value="US">US </option>
-            <option value="UK">UK </option>
-          </select>
-          <div class="div-region" id="divUS">
-            <label>Sitekey</label>
-            <input type="text" id="sitekeyUS" class="input input-sitekey full-width">
-            <label>Client ID</label>
-            <input type="text" id="clientIdUS" class="input input-clientid full-width">
-            <label>Captcha Duplicate</label>
-            <input type="text" id="capdupUS" class="input input-capdup full-width">
-          </div>
-          <div class="div-region" id="divUK" hidden>
-            <label>Sitekey</label>
-            <input type="text" id="sitekeyUK" class="input input-sitekey full-width">
-            <label>Client ID</label>
-            <input type="text" id="clientIdUK" class="input input-clientid full-width">
-            <label>Captcha Duplicate</label>
-            <input type="text" id="capdupUK" class="input input-capdup full-width">
-          </div>
-        </div>
-      </div> -->
-      <script>
+    </div>
+    <script>
       window.$ = window.jQuery = require('jquery');
-</script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-       <script src="./scripts/bootstrap.min.js"></script> 
-      <script src="index.js"></script>
-      <script>require('electron-connect').client.create()</script>
-      <script src="./scripts/titlebar.js"></script>
-    </body>
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+    <script src="./scripts/bootstrap.min.js"></script>
+    <script src="./index.js"></script>
+    <script> require('electron-connect').client.create() </script>
+    <script src="./scripts/titlebar.js"></script>
+</body>
+
 </html>
