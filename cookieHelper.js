@@ -1,3 +1,5 @@
+const request = require('request').defaults({gzip: true});
+
 function nightmareToRequest(cookies, cookieJar) {
   for (var c = 0; c < cookies.length; c++) {
     let cookie = cookies[c];
