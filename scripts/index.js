@@ -70,8 +70,8 @@ const clientIdUK = $('#clientIdUK');
 const capdupUK = $('#capdupUK');
 
 /* Theme Settings */
-const darkTheme = "./styles/css/dark-app.css";
-const lightTheme = "./styles/css/app.css";
+const darkTheme = "./build/css/dark-app.css";
+const lightTheme = "./build/css/app.css";
 var activeTheme = '';
 
 function setInitialTheme(theme) {
@@ -116,7 +116,6 @@ $('.tab-link').click(function() {
       $(this).fadeOut(0)
     }
   })
-
 });
 
 // tabSelectAddTasks.click(function(event) {
@@ -480,9 +479,7 @@ ipcRenderer.on('setupUi', function(event, data) {
   clientIdUK.val(data.clientIdUK);
   capdupUS.val(data.capdupUS);
   capdupUK.val(data.capdupUK);
-  activeTheme = data.activeTheme;
-  console.log(activeTheme);
-  setInitialTheme(activeTheme);
+  setInitialTheme(data.activeTheme);
 })
 
 ipcRenderer.send('setupUi', {});

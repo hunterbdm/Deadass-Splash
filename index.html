@@ -17,33 +17,33 @@
       <h5>Deadass Splash</h5>
     </div>
     <a class="btn title-bar-btns" id="min-btn">
-            <i class="material-icons">remove</i>
-          </a>
+      <i class="material-icons">remove</i>
+    </a>
     <a class="btn title-bar-btns" id="max-btn">
-           <i class="material-icons">crop_square</i>
-          </a>
+      <i class="material-icons">crop_square</i>
+    </a>
     <a class="btn title-bar-btns" id="close-btn">
-            <i class="material-icons">clear</i>
-          </a>
+      <i class="material-icons">clear</i>
+    </a>
   </div>
   <div class="container-fluid">
     <div class="row">
       <div class="col side-nav">
         <div class="list-group flex-column">
           <a href="#" class="tab-link list-group-item list-group-item-action" tab="addBruteForce">
-                    <i class="material-icons">add_box</i>&nbsp;New Brute Force
+                    <i class="material-icons">add_box</i>&nbsp;&nbsp;&nbsp;New Brute Force
                 </a>
           <a href="#" class="tab-link list-group-item list-group-item-action" tab="addTask">
-                   <i class="material-icons">add_circle</i>&nbsp;New Cart Tasks
+                   <i class="material-icons">add_circle</i>&nbsp;&nbsp;&nbsp;New Cart Tasks
                 </a>
           <a href="#" class="tab-link list-group-item list-group-item-action" tab="bruteForce">
-                   <i class="material-icons">lock_open</i>&nbsp;Brute Force Tasks
+                   <i class="material-icons">lock_open</i>&nbsp;&nbsp;&nbsp;Brute Force Tasks
                 </a>
           <a href="#" class="tab-link list-group-item list-group-item-action" tab="cart">
-                   <i class="material-icons">shopping_cart</i>&nbsp;Cart Tasks
+                   <i class="material-icons">shopping_cart</i>&nbsp;&nbsp;&nbsp;Cart Tasks
                 </a>
           <a href="#" class="tab-link list-group-item list-group-item-action" tab="settings">
-                   <i class="material-icons">settings</i>&nbsp;Settings
+                   <i class="material-icons">settings</i>&nbsp;&nbsp;&nbsp;Settings
                 </a>
         </div>
       </div>
@@ -356,13 +356,13 @@
             </div>
             <div class="tab-pane fade" id="appSettings" aria-expanded="false">
               <fieldset class="form-group">
-                <legend>Theme Options:</legend>
+                <legend>Theme:</legend>
                 <div class="btn-group" id="themeSelector" data-toggle="buttons" theme="">
                   <label class="btn btn-primary">
-                        <input type="radio" name="options" id="lightTheme" autocomplete="off"> Light
+                    <input type="radio" name="options" id="darkTheme" autocomplete="off"> Dark
                   </label>
-                  <label class="btn btn-primary">
-                      <input type="radio" name="options" id="darkTheme" autocomplete="off"> Dark
+                  <label class="btn btn-secondary">
+                    <input type="radio" name="options" id="lightTheme" autocomplete="off"> Light
                   </label>
                 </div>
               </fieldset>
@@ -378,10 +378,11 @@
       window.$ = window.jQuery = require('jquery');
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-    <script src="./scripts/bootstrap.min.js"></script>
+    <!-- <script src="./scripts/bootstrap.min.js"></script>
     <script src="./index.js"></script>
+    <script src="./scripts/titlebar.js"></script> -->
+    <script src="./build/scripts/app.js"></script>
     <script> require('electron-connect').client.create() </script>
-    <script src="./scripts/titlebar.js"></script>
 </body>
 
 </html>

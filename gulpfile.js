@@ -4,18 +4,24 @@ var sass = require('gulp-sass');
 var electron = require('electron-connect').server.create();
 var series = require('run-sequence');
 var sourcemaps = require('gulp-sourcemaps');
+var concat = require('gulp-concat');
 
 gulp.task('sass', function () {
   gulp.src('./styles/sass/**/*.scss')
     .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('./styles/css'));
+    .pipe(gulp.dest('./build/css'));
 });
+
+gulp.task('scripts', function() {
+  return gulp.src(['./scripts/bootstrap.min.js', './scripts/index.js', './scripts/titlebar.js'])
+    .pipe(concat('app.js'))
+    .pipe(gulp.dest('./build/scripts'));
+})
 
 gulp.task('watch', function() {
   gulp.watch('./styles/sass/**/*.scss', ['sass']);
-
   gulp.start(electron.reload);
 });
 
@@ -30,4 +36,4 @@ gulp.task('serve', function () {
 
 });
 
-gulp.task('default', ['serve', 'watch']);
+gulp.task('default', ['scripts', 'serve', 'watch']);

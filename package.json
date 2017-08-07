@@ -18,6 +18,7 @@
     "electron-connect": "^0.6.1",
     "electron-packager": "^8.7.1",
     "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
     "gulp-sass": "^3.1.0",
     "gulp-sass-themes": "^2.0.1",
     "gulp-sourcemaps": "^2.6.0",
@@ -27,7 +28,7 @@
     "build-osx": "electron-packager . --platform darwin --overwrite --asar --out ./dist ",
     "build-win": "electron-packager . --platform win32 --overwrite --asar --out ./dist && xcopy \"./node_modules/electron\" \"./dist/deadass-splash-win32-x64/node_modules/electron\" /i /E",
     "start": "electron .",
-    "dev": "gulp watch"
+    "dev": "gulp"
   },
   "author": "@hunter_bdm",
   "license": "ISC"
