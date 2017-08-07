@@ -74,6 +74,21 @@ const darkTheme = "./styles/css/dark-app.css";
 const lightTheme = "./styles/css/app.css";
 var activeTheme = '';
 
+function setInitialTheme(theme) {
+  let el = document.getElementById('css-link');
+  if(theme === 'darkTheme') {
+    el.href = darkTheme;
+    activeTheme = 'darkTheme';
+  } else {
+     el.href = lightTheme;
+    activeTheme = 'lightTheme';
+  }
+  // hacky way of waiting until the theme has been set and loaded. Minimal inpact on performance
+  setTimeout(function() {
+    document.body.style.visibility = "visible"
+  }, 50);
+}
+
 /* Theme Switch */
 $('#themeSelector').change(function() {
   var el = document.getElementById("css-link");
@@ -465,6 +480,9 @@ ipcRenderer.on('setupUi', function(event, data) {
   clientIdUK.val(data.clientIdUK);
   capdupUS.val(data.capdupUS);
   capdupUK.val(data.capdupUK);
+  activeTheme = data.activeTheme;
+  console.log(activeTheme);
+  setInitialTheme(activeTheme);
 })
 
 ipcRenderer.send('setupUi', {});
