@@ -39,8 +39,11 @@ A: No, someone must get through the queue before you are able to get sitekey/cli
 I have decided to open source this project. If you are feeling generous and would like to donate you can with the links below. It means a lot, thank you. <3
 
 [![PayPal Donate](https://www.paypalobjects.com/webstatic/en_US/i/btn/png/silver-pill-paypal-60px.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=danthemangall@gmail.com&lc=US&item_name=Deadass-Splash&no_note=0&currency_code=USD&bn=PP-DonationsBF:btn_donate_LG.gif:NonHostedGuest&submit.x=54&submit.y=12 "PayPal Donate")
+
 Cash App: $hunterbdm
+
 Bitcoin: 1MMJHijcMkG6nTWGTTrpB75sF6pukX97R5
+
 Ethereum: 0x1ca69bAe95d24d2feBAA29910cE505a41aeb7D1e
 
 ## Video Tutorial (Click image to view) (Video is outdated)
