@@ -24,35 +24,41 @@ Adding google cookies allows you to get easier captchas in the bruteforce tasks.
 
 ## FAQ
 Q: Where do I get my 2captcha key?
-A: Sign up on [here](https://2captcha.com/) and add funds
+A: Sign up on [here](https://2captcha.com/) and add funds.
 
-Q: Where do I get the sitekey & form json?
+Q: Where do I get the sitekey/clientid/captcha duplicate?
 A: I will post it on [my twitter](https://twitter.com/hunter_bdm) during releases.
 
 Q: When do I start the bot?
 A: Start/Add your bruteforce tasks once stock goes live. Watch the video to understand how the cart tasks work.
 
-Q: Is there a way to get sitekey or form json before release?
-A: No, someone must get through the queue before you are able to get sitekey or form json.
+Q: Is there a way to get sitekey/clientid/captcha duplicate before release?
+A: No, someone must get through the queue before you are able to get sitekey/clientid/captcha duplicate.
 
 ## Feeling Generous?
 I have decided to open source this project. If you are feeling generous and would like to donate you can with the links below. It means a lot, thank you. <3
 
-Paypal: https://www.paypal.me/DTMGall
+[![PayPal Donate](https://www.paypalobjects.com/webstatic/en_US/i/btn/png/silver-pill-paypal-60px.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=danthemangall@gmail.com&lc=US&item_name=Deadass-Splash&no_note=0&currency_code=USD&bn=PP-DonationsBF:btn_donate_LG.gif:NonHostedGuest&submit.x=54&submit.y=12 "PayPal Donate")
 Cash App: $hunterbdm
-Bitcoin: 1Ed9YCQZ5h3u3718nk9TaCSQe1EbqXPeAs
-Ethereum: 0xAea46078f4bdBa2c7581375A4F55B7Ff3703e239
+Bitcoin: 1MMJHijcMkG6nTWGTTrpB75sF6pukX97R5
+Ethereum: 0x1ca69bAe95d24d2feBAA29910cE505a41aeb7D1e
 
-## Video Tutorial (Click image to view)
+## Video Tutorial (Click image to view) (Video is outdated)
 [![Setup and use Tutorial](http://img.youtube.com/vi/ZQRasLomOBY/0.jpg)](http://www.youtube.com/watch?v=ZQRasLomOBY "Deadass-Splash Adidas bot tutorial")
+
 If video will not play try [this](http://youtubeonrepeat.com/watch/?v=ZQRasLomOBY)
 
 ## Screenshots
-![screen shot](http://i.imgur.com/Cv5xiEE.png)
-![screen shot](http://i.imgur.com/LUJu8n7.png)
-![screen shot](http://i.imgur.com/9x8bsgI.png)
-![screen shot](http://i.imgur.com/t88wHpd.png)
-![screen shot](http://i.imgur.com/S8OmsPB.png)
+![screen shot](http://i.imgur.com/vmwoz8q.png)
+![screen shot](http://i.imgur.com/HeB98WF.png)
+![screen shot](http://i.imgur.com/ZR3W3xE.png)
+![screen shot](http://i.imgur.com/z2dvcMO.png)
+![screen shot](http://i.imgur.com/fpE66tL.png)
+![screen shot](http://i.imgur.com/Xl3XVai.png)
+![screen shot](http://i.imgur.com/N2J147b.png)
+![screen shot](http://i.imgur.com/q0nJmeN.png)
+![screen shot](http://i.imgur.com/siq2L6k.png)
+![screen shot](http://i.imgur.com/DFygKf9.png)
 
 ## Notes
 1. If you wish to make SASS changes gulp may need to be installed globaly(npm install -g gulp)

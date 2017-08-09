@@ -8,7 +8,6 @@ const fs = require('fs');
 const cheerio = require('cheerio')
 const cookieHelper = require('./cookieHelper.js')
 
-//const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3128.0 Safari/537.36';
 const sizeIds = {
     '4.5': '_540',
     '5': '_550',
@@ -45,11 +44,6 @@ function init() {
     mainWin = new BrowserWindow({width:1300, height:700, icon: __dirname + '/img/favicon.png', showDevTools: true, frame: false});
     //mainWin.webContents.openDevTools();
     mainWin.loadURL('file://' + __dirname +'/index.html');
-    //mainWin.setMenu(null);
-
-    //win.on('closed', () => { win = null; }); // Not sure if this is needed
-    // mainWin.on("maximize", () => { win.webContents.send("maximize"); });
-    // mainWin.on("unmaximize", () => { win.webContents.send("unmaximize"); });
     
     mainWin.addListener('closed', function() {
       app.exit();
