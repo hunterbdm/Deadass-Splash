@@ -436,16 +436,17 @@ class BruteforceTask {
         this.enableButton('copyCookies');
         this.enableButton('copyHtml');
         let checkForSitekey = () => {
-          this.getHtml((pageSource) => {
-            if (pageSource.includes('data-sitekey')) {
-            //if (true) {
-              this.setStatus('Through Queue');
-              this.setColor('green');
-              this.enableButton('fillAtc');
-            }
-            else
-              setTimeout(checkForSitekey, 20000);
-          });
+          this.nightmare.evaluate(function() {
+              return typeof CAPTCHA_KEY !== 'undefined';
+          })
+            .then(function(hasSiteKey) {
+                if (hasSiteKey) {
+                    this.setStatus('Through Queue');
+                    this.setColor('green');
+                    this.enableButton('fillAtc');
+                } else
+                    setTimeout(checkForSitekey, 20000);
+          });       
         }
         checkForSitekey();
       })
