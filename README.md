@@ -35,13 +35,6 @@ A: Start/Add your bruteforce tasks once stock goes live. Watch the video to unde
 Q: Is there a way to get sitekey or form json before release?
 A: No, someone must get through the queue before you are able to get sitekey or form json.
 
-## Feeling Generous?
-I have decided to open source this project. If you are feeling generous and would like to donate you can with the links below. It means a lot, thank you. <3
-
-Paypal: https://www.paypal.me/DTMGall
-Cash App: $hunterbdm
-Bitcoin: 1Ed9YCQZ5h3u3718nk9TaCSQe1EbqXPeAs
-Ethereum: 0xAea46078f4bdBa2c7581375A4F55B7Ff3703e239
 
 ## Video Tutorial (Click image to view)
 [![Setup and use Tutorial](http://img.youtube.com/vi/ZQRasLomOBY/0.jpg)](http://www.youtube.com/watch?v=ZQRasLomOBY "Deadass-Splash Adidas bot tutorial")
